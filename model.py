@@ -41,7 +41,7 @@ class Model:
         img = self.input_preprocess(img_filename)
         pred = newModel.predict(img)
         numFilters = pred.shape[3]
-        print('The output of the chosen layer is: ', pred.shape, ', so there are ', numFilters, ' images as output of this layer. Choosing one at random...')
+        print('The output of the chosen layer is: ', pred.shape, ', so there are ', numFilters, ' images as output of this layer. Choosing some at random...')
 
         pred = np.squeeze(pred)
         #now pred has shape like (112, 112, 128), which correspond to 128 images 112x112
@@ -50,7 +50,7 @@ class Model:
 
         
         
-        n = 2
+        n = 24
         for i in range(n):
             r = random.randint(0, numFilters - 1)
 
@@ -66,7 +66,8 @@ class Model:
             #Image.fromarray(arr_img, 'L').save('./extract_output/' + str(i) + '.png')
             plt.figure()
             plt.imshow(arr_img)
-            plt.show()
+            plt.savefig('./extract_output/' + str(i) + '.png')
+            plt.close()
         
 
     def printLayers(self):
