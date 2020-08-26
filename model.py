@@ -56,6 +56,8 @@ class Model:
         
         image = preprocess_input(image)
 
+        
+
 
 m = Model()
 if sys.argv[1] == 'infer':
