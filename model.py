@@ -7,7 +7,6 @@ import keras
 import sys
 import random
 import numpy as np
-from PIL import Image
 import matplotlib.pyplot as plt
 
 '''
@@ -63,7 +62,6 @@ class Model:
             arr_img = arr_img / maxa
             arr_img = arr_img * 255 
 
-            #Image.fromarray(arr_img, 'L').save('./extract_output/' + str(i) + '.png')
             plt.figure()
             plt.imshow(arr_img)
             plt.savefig('./extract_output/' + str(i) + '.png')
