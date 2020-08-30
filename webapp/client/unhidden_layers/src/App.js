@@ -31,4 +31,5 @@ After the user uploads a picture, the server sends all the mid-output images to 
 The client displays them.
 
 WIP right now: the user uploads the image, the server sends the mid-output images and the client saves them and displays them.
+  upload image:  https://medium.com/@nagachaitanyakonada/image-upload-functionality-cd497a5bba54
 */
