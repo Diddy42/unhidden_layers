@@ -1,13 +1,21 @@
 const express = require('express')
 const app = express()
-const port = 8080
-const cors = require('cors')
+const port = 3001
+//const cors = require('cors')
 var path = require('path')
 
-app.use(cors())
+//app.use(cors())
+
+app.post('/sendImage', (req, res) => {
+    console.log('received send image')
+})
+
+app.get('/test', (req, res) => {
+    console.log('test')
+})
 
 app.listen(port, () => {
-    console.log('server is listening')
+    console.log('server is listening on ' + port)
 })
 
 

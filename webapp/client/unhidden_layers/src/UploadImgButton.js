@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button'
+import * as api from './api.js'
 
 class UploadImgButton extends React.Component {
     constructor(props){
@@ -19,8 +20,15 @@ class UploadImgButton extends React.Component {
     }
 
     handleClick = () => {
-        console.log('i should upload the image now')
-        console.log(document.querySelector('#fileUpload').files[0])
+        console.log('uploadImgButton - i should upload the image now')
+        api.testPing()
+        .then((res) => {
+            console.log('uploadImgButton - test ping ok')
+        })
+        .catch((err) => {
+            console.log('uploadImgButton - test ping ok')
+        })
+        //api.sendImage(document.querySelector('#fileUpload').files[0])
     }
 }
 
