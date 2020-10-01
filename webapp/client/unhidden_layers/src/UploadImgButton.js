@@ -6,17 +6,26 @@ class UploadImgButton extends React.Component {
         super(props)
     }
 
-    render(){
+    render(){ 
         return <>
+            <h1>Upload image:</h1>
+            <input type="file" id="fileUpload" />
+
             <Button onClick={ () => this.handleClick() }>
-                Upload image
+                Save
             </Button>
         </>
+        
     }
 
     handleClick = () => {
         console.log('i should upload the image now')
+        console.log(document.querySelector('#fileUpload').files[0])
     }
 }
 
 export default UploadImgButton
+
+/*
+inspiration: https://flaviocopes.com/file-upload-using-ajax/
+*/
