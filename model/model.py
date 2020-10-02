@@ -49,7 +49,7 @@ class Model:
 
         
         
-        n = 8
+        n = 3
         for i in range(n):
             r = random.randint(0, numFilters - 1)
 
@@ -84,6 +84,7 @@ class Model:
 
 
 m = Model()
+print(m.model.summary())
 if sys.argv[1] == 'infer':
     m.infer(sys.argv[2])
 elif sys.argv[1] == 'extract':
