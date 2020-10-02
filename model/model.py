@@ -49,7 +49,7 @@ class Model:
 
         
         
-        n = 24
+        n = 8
         for i in range(n):
             r = random.randint(0, numFilters - 1)
 
