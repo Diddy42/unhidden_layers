@@ -2,10 +2,13 @@ const url = '/'
 
 export async function sendImage(file){
     console.log('api.js - sending image')
+    const formData = new FormData()
+    formData.append('myFile', file)
+
     return new Promise((resolve, reject) => {
         fetch(url + 'sendImage', {
             method : 'POST',
-            body : file
+            body : formData
         })
         .then((response) => {
             if(response.ok){

@@ -21,14 +21,8 @@ class UploadImgButton extends React.Component {
 
     handleClick = () => {
         console.log('uploadImgButton - i should upload the image now')
-        api.testPing()
-        .then((res) => {
-            console.log('uploadImgButton - test ping ok')
-        })
-        .catch((err) => {
-            console.log('uploadImgButton - test ping ok')
-        })
-        //api.sendImage(document.querySelector('#fileUpload').files[0])
+        
+        api.sendImage(document.querySelector('#fileUpload').files[0])
     }
 }
 
