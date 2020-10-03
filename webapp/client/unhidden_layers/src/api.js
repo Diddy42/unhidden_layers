@@ -12,7 +12,8 @@ export async function sendImage(file){
         })
         .then((response) => {
             if(response.ok){
-                resolve();
+                //const resJ = await response.json();
+                resolve(response);
             }
             else{
                 reject(response);

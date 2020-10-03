@@ -8,7 +8,7 @@ class App extends React.Component {
   render(){
     return <>
       <UploadImgButton/>
-      <FeatureImg filename='l2_0.png'/>
+      <FeatureImg filename='l2_2.png'/>
     </>
   }
 }

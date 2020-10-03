@@ -6,6 +6,8 @@ var sleep = require('system-sleep');
 const app = new express()
 const port = 3001
 
+var cnt = 0;
+
 app.use(
     express.json(),
     fileupload()
@@ -14,24 +16,27 @@ app.use(
 
 app.post('/sendImage', (req, res) => {
     console.log('received send image')
-    const fileName = req.files.myFile.name
-  const path = __dirname + '/images/' + fileName
+    const fileName = cnt + '_' + req.files.myFile.name
+    
+    const fpath = path.resolve('../../model/unprocessed/' + fileName)
 
-  req.files.myFile.mv(path, (error) => {
-    if (error) {
-      console.error(error)
-      res.writeHead(500, {
-        'Content-Type': 'application/json'
-      })
-      res.end(JSON.stringify({ status: 'error', message: error }))
-      return
-    }
+    req.files.myFile.mv(fpath, (error) => {
+      if (error) {
+        console.error(error)
+        res.writeHead(500, {
+          'Content-Type': 'application/json'
+        })
+        res.end(JSON.stringify({ status: 'error', message: error }))
+        return
+      }
 
-    res.writeHead(200, {
+    /*res.writeHead(200, {
       'Content-Type': 'application/json'
-    })
-    res.end(JSON.stringify({ status: 'success', path: '/img/houses/' + fileName }))
+    })*/
+    res.json({ unique_id : cnt })
   })
+
+  cnt++;
 })
 
 app.get('/test', (req, res) => {
