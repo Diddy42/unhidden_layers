@@ -8,6 +8,16 @@ const port = 3001
 
 var cnt = 0;
 
+fs.readdir(path.resolve('../../model/extract_output/'), function (err, files) {
+    if (err) {
+        return console.log('Unable to scan directory: ' + err);
+    } 
+    files.forEach(function (file) {
+    	//console.log(path.resolve('../../model/extract_output/') + '/' + file)
+        fs.unlinkSync(path.resolve('../../model/extract_output/') + '/' + file)
+    });
+});
+
 app.use(
     express.json(),
     fileupload()
@@ -43,16 +53,24 @@ app.get('/test', (req, res) => {
 
 
 app.get('/features/:filename', (req, res) => {
-    console.log('received request for features')
+    console.log('received request for features, filename: ' + req.params.filename)
     const filepath = path.resolve('../../model/extract_output/' + req.params.filename)
     var sent = false;
     var i = 0;
-    for(i = 0; i < 30; i++){
+    for(i = 0; i < 60; i++){
       try {
         if (fs.existsSync(filepath)) {
           res.sendFile(filepath)
+          res.on('finish', function() {
+	      try {
+			fs.unlinkSync(filepath)
+          	console.log('deleted ' + filepath)
+	      } catch(e) {
+			console.log("error removing ", filepath); 
+	      }
+	 	 });
           sent = true;
-          i = 31;
+          i = 61;
         }
       }catch(err) {
 

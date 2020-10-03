@@ -17,6 +17,7 @@ class UploadImgButton extends React.Component {
 
     handleClick = () => {
         console.log('uploadImgButton - i should upload the image now')
+        this.props.setId(-1)
         
         api.sendImage(document.querySelector('#fileUpload').files[0])
         .then((res) => {

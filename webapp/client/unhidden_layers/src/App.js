@@ -17,7 +17,7 @@ class App extends React.Component {
 
   render(){
     console.log(this.state)
-    if(this.state.unique_id == -1){
+    if(this.state.unique_id === -1){
       return <>
         <Container fluid>
           <Row>
@@ -46,12 +46,12 @@ class App extends React.Component {
               </thead>
 
               <tbody>
-                <tr>
-                  <td><h3>Layer #2</h3></td>
-                  <td><FeatureImg filename={this.state.unique_id+'_' + 'l2_0.png'}/></td>
-                  <td><FeatureImg filename={this.state.unique_id+'_' + 'l2_1.png'}/></td>
-                  <td><FeatureImg filename={this.state.unique_id+'_' + 'l2_2.png'}/></td>
-                </tr>
+                {this.createTableRow(2)}
+                {this.createTableRow(5)}
+                {this.createTableRow(9)}
+                {this.createTableRow(13)}
+                {this.createTableRow(17)}
+                {this.createTableRow(18)}
               </tbody>
             </Table>
           </Col>
@@ -63,11 +63,12 @@ class App extends React.Component {
   }
 
   createTableRow = (layer_number) => {
+    console.log(layer_number)
     return <tr>
       <td><h3>Layer #{layer_number}</h3></td>
-      <td><FeatureImg filename={this.state.unique_id+'_' + 'l' + {layer_number} + '_0.png'}/></td>
-      <td><FeatureImg filename={this.state.unique_id+'_' + 'l' + {layer_number} + '_1.png'}/></td>
-      <td><FeatureImg filename={this.state.unique_id+'_' + 'l' + {layer_number} + '_2.png'}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_0.png'}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_1.png'}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_2.png'}/></td>
     </tr>
   }
 
