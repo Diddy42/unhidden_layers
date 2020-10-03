@@ -21,12 +21,12 @@ class UploadImgButton extends React.Component {
         api.sendImage(document.querySelector('#fileUpload').files[0])
         .then((res) => {
             console.log('uploadImgButton.js - handleClick - sendImage then')
-            console.log(res.unique_id)
+            this.props.setId(res.unique_id)
         })
     }
 }
 
-export default UploadImgButton
+export default UploadImgButton;
 
 /*
 inspiration: https://flaviocopes.com/file-upload-using-ajax/
