@@ -1,5 +1,8 @@
 const express = require('express')
 const fileupload = require('express-fileupload')
+const fs = require('fs')
+var path = require('path');
+var sleep = require('system-sleep');
 const app = new express()
 const port = 3001
 
@@ -36,10 +39,10 @@ app.get('/test', (req, res) => {
 })
 
 
-app.get('/features', (req, res) => {
+app.get('/features/:filename', (req, res) => {
     console.log('received request for features')
-    console.log(path.resolve('../../model/extract_output/l2_0.png'))
-    res.sendFile(path.resolve('../../model/extract_output/l2_0.png'))
+    sleep(5000);
+    res.sendFile(path.resolve('../../model/extract_output/' + req.params.filename))
 })
 
 

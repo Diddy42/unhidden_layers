@@ -2,35 +2,15 @@ import React from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UploadImgButton from './UploadImgButton.js'
-import * as api from './api.js'
+import FeatureImg from './FeatureImg.js'
 
 class App extends React.Component {
-  constructor(props){
-    super(props)
-    api.requestImage('test')
-    .then((res) => {
-      console.log('app.js - requestImage then')
-      console.log(res)
-    })
-    .catch((res) => {
-      console.log('app.js - requestImage catch')
-      console.log(res)
-    })
-  }
-
   render(){
     return <>
       <UploadImgButton/>
+      <FeatureImg/>
     </>
   }
-
-  /*
-  fetch example
-  testGet = () => {
-    fetch('http://localhost:8080/')
-      .then(res => console.log(res))
-  }
-  */
 }
 
 export default App;

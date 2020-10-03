@@ -3,10 +3,6 @@ import Button from 'react-bootstrap/Button'
 import * as api from './api.js'
 
 class UploadImgButton extends React.Component {
-    constructor(props){
-        super(props)
-    }
-
     render(){ 
         return <>
             <h1>Upload image:</h1>
