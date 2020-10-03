@@ -26,7 +26,7 @@ class Model:
         print('%s (%.2f%%)' % (label[1], label[2] * 100))
         return '%s (%.2f%%)' % (label[1], label[2] * 100)
 
-    def extract(self, img_filename):
+    def extract(self, img_filename, unique_id):
         self.printLayers()
         significant_layers = [2, 5, 9, 13, 17, 18]
 
@@ -61,7 +61,7 @@ class Model:
 
                 plt.figure()
                 plt.imshow(arr_img)
-                plt.savefig('./extract_output/' + 'l'+str(sl)+'_' + str(i) + '.png')
+                plt.savefig('./extract_output/' + str(unique_id)+'_' + 'l'+str(sl)+'_' + str(i) + '.png')
                 plt.close()
         
 
@@ -92,6 +92,8 @@ def process_img(file, m, unique_id, output_folder):
     f = open(output_folder + '/' + unique_id + '.txt', 'w')
     f.write(inference)
     f.close()
+
+    m.extract(file, unique_id)
 
     os.remove(file)
 

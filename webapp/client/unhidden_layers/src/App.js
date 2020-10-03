@@ -17,7 +17,17 @@ class App extends React.Component {
 
   render(){
     console.log(this.state)
-    return <>
+    if(this.state.unique_id == -1){
+      return <>
+        <Container fluid>
+          <Row>
+            <Col><UploadImgButton setId={this.setUniqueId}/></Col>
+          </Row>
+        </Container>
+      </>
+    }
+    else{
+      return <>
       <Container fluid>
         <Row>
           <Col><UploadImgButton setId={this.setUniqueId}/></Col>
@@ -38,9 +48,9 @@ class App extends React.Component {
               <tbody>
                 <tr>
                   <td><h3>Layer #2</h3></td>
-                  <td><FeatureImg filename='l2_0.png'/></td>
-                  <td><FeatureImg filename='l2_1.png'/></td>
-                  <td><FeatureImg filename='l2_2.png'/></td>
+                  <td><FeatureImg filename={this.state.unique_id+'_' + 'l2_0.png'}/></td>
+                  <td><FeatureImg filename={this.state.unique_id+'_' + 'l2_1.png'}/></td>
+                  <td><FeatureImg filename={this.state.unique_id+'_' + 'l2_2.png'}/></td>
                 </tr>
               </tbody>
             </Table>
@@ -49,6 +59,7 @@ class App extends React.Component {
         
       </Container>
     </>
+    }
   }
 
   setUniqueId = (id) => {
