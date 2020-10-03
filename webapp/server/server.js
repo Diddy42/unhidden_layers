@@ -41,8 +41,27 @@ app.get('/test', (req, res) => {
 
 app.get('/features/:filename', (req, res) => {
     console.log('received request for features')
-    sleep(5000);
-    res.sendFile(path.resolve('../../model/extract_output/' + req.params.filename))
+    const filepath = path.resolve('../../model/extract_output/' + req.params.filename)
+    var sent = false;
+    var i = 0;
+    for(i = 0; i < 30; i++){
+      try {
+        if (fs.existsSync(filepath)) {
+          res.sendFile(filepath)
+          sent = true;
+          i = 31;
+        }
+      }catch(err) {
+
+      }
+      sleep(1000);
+    }
+
+    if(!sent){
+      console.log('server.js - get /features/:filename - file not found')
+      res.status(404)
+      res.end()
+    }
 })
 
 
