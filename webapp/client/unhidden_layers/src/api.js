@@ -43,3 +43,25 @@ export async function testPing(){
         })
     })
 }
+
+export async function requestImage(filename){
+    return new Promise((resolve, reject) => {
+        fetch(url + 'features')
+        .then((response) => {
+            if(response.ok){
+                console.log('api.js - requestImage - response ok')
+                console.log(response)
+                resolve(response);
+            }
+            else{
+                console.log('api.js - requestImage - response not ok')
+                console.log(response)
+                reject(response);
+            }
+        })
+        .catch((err) => {
+            console.log('api.js - requestImage - could not connect to server' + err)
+            reject(err);
+        })
+    })
+}

@@ -35,15 +35,14 @@ app.get('/test', (req, res) => {
     console.log('test')
 })
 
+
+app.get('/features', (req, res) => {
+    console.log('received request for features')
+    console.log(path.resolve('../../model/extract_output/l2_0.png'))
+    res.sendFile(path.resolve('../../model/extract_output/l2_0.png'))
+})
+
+
 app.listen(port, () => {
     console.log('server is listening on ' + port)
 })
-
-
-/*
-how to send an image
-
-app.get('/', (req, res) => {
-    res.sendFile(path.resolve('../../model/extract_output/0.png'))
-})
-*/
