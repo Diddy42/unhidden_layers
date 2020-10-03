@@ -28,23 +28,19 @@ class App extends React.Component {
             <Table striped bordered hover>
               <thead>
                 <tr>
-                  <th>Layer #2</th>
-                  <th>Layer #5</th>
-                  <th>Layer #9</th>
-                  <th>Layer #13</th>
-                  <th>Layer #17</th>
-                  <th>Layer #18</th>
+                  <th>Layer number</th>
+                  <th>Random output of this layer</th>
+                  <th>Random output of this layer</th>
+                  <th>Random output of this layer</th>
                 </tr>
               </thead>
 
               <tbody>
                 <tr>
+                  <td><h3>Layer #2</h3></td>
                   <td><FeatureImg filename='l2_0.png'/></td>
-                  <td><FeatureImg filename='l5_0.png'/></td>
-                  <td><FeatureImg filename='l9_0.png'/></td>
-                  <td><FeatureImg filename='l13_0.png'/></td>
-                  <td><FeatureImg filename='l17_0.png'/></td>
-                  <td><FeatureImg filename='l18_0.png'/></td>
+                  <td><FeatureImg filename='l2_1.png'/></td>
+                  <td><FeatureImg filename='l2_2.png'/></td>
                 </tr>
               </tbody>
             </Table>
