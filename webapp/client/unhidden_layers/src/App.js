@@ -62,6 +62,15 @@ class App extends React.Component {
     }
   }
 
+  createTableRow = (layer_number) => {
+    return <tr>
+      <td><h3>Layer #{layer_number}</h3></td>
+      <td><FeatureImg filename={this.state.unique_id+'_' + 'l' + {layer_number} + '_0.png'}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_' + 'l' + {layer_number} + '_1.png'}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_' + 'l' + {layer_number} + '_2.png'}/></td>
+    </tr>
+  }
+
   setUniqueId = (id) => {
     this.setState({ unique_id : id });
   }

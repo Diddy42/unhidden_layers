@@ -104,6 +104,7 @@ output_folder = 'extract_output'
 while True:
     f = new_image(unprocessed_folder)
     if f != False:
+        time.sleep(5)
         print('new file: ' + f)
         unique_id = f.split('.')[0]
         process_img(unprocessed_folder + '/' + f, m, unique_id, output_folder)
