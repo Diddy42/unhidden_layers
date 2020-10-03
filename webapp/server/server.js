@@ -30,13 +30,10 @@ app.post('/sendImage', (req, res) => {
         return
       }
 
-    /*res.writeHead(200, {
-      'Content-Type': 'application/json'
-    })*/
+    console.log('saved file with unique id ' + cnt)
     res.json({ unique_id : cnt })
+    cnt++;
   })
-
-  cnt++;
 })
 
 app.get('/test', (req, res) => {

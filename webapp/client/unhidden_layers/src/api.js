@@ -5,24 +5,18 @@ export async function sendImage(file){
     const formData = new FormData()
     formData.append('myFile', file)
 
-    return new Promise((resolve, reject) => {
-        fetch(url + 'sendImage', {
-            method : 'POST',
-            body : formData
-        })
-        .then((response) => {
-            if(response.ok){
-                //const resJ = await response.json();
-                resolve(response);
-            }
-            else{
-                reject(response);
-            }
-        })
-        .catch((err) => {
-            reject(err);
-        })
-    })
+    const res = await fetch(url + 'sendImage', {
+        method : 'POST',
+        body : formData
+    });
+
+    if(res.ok){
+        const resJ = await res.json();
+        return resJ;
+    }
+    
+    let err = {status: res.status, errObj:res};
+    throw err;
 }
 
 export async function testPing(){
