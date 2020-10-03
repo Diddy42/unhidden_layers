@@ -16,7 +16,8 @@ app.use(
 
 app.post('/sendImage', (req, res) => {
     console.log('received send image')
-    const fileName = cnt + '_' + req.files.myFile.name
+    var ext = req.files.myFile.name.substr(req.files.myFile.name.lastIndexOf('.') + 1);
+    const fileName = cnt + '.' + ext
     
     const fpath = path.resolve('../../model/unprocessed/' + fileName)
 
