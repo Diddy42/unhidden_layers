@@ -95,10 +95,12 @@ app.get('/features/:filename', (req, res) => {
     var sent = false;
     var i = 0;
     for(i = 0; i < 60 && !sent; i++){
+    	console.log('trying to find ' + req.params.filename + '...')
       try {
         if (fs.existsSync(filepath)) {
           res.sendFile(filepath)
           res.on('finish', function() {
+          	sent = true;
 	      try {
 			fs.unlinkSync(filepath)
           	console.log('deleted ' + filepath)
@@ -106,7 +108,7 @@ app.get('/features/:filename', (req, res) => {
 			console.log("error removing ", filepath); 
 	      }
 	 	 });
-          sent = true;
+        
         }
       }catch(err) {
 

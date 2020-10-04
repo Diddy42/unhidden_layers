@@ -18,6 +18,7 @@ class App extends React.Component {
 
   render(){
     console.log(this.state)
+  
     if(this.state.unique_id === -1){
       return <>
         <Container fluid>
@@ -49,12 +50,15 @@ class App extends React.Component {
               </thead>
 
               <tbody>
-                {this.createTableRow(2, 1)}
-                {this.createTableRow(5, 2)}
-                {this.createTableRow(9, 4)}
-                {this.createTableRow(13, 6)}
-                {this.createTableRow(17, 8)}
-                {this.createTableRow(18, 10)}
+              {this.createTableRow(1, 0.5, 1, 1.5)}
+              {this.createTableRow(4, 2, 2.5, 3)}
+              {this.createTableRow(12, 3.5, 4, 4.5)}
+              {this.createTableRow(19, 5, 5.5, 6)}
+              {this.createTableRow(30, 6.5, 7, 7.5)}
+              {this.createTableRow(44, 8, 8.5, 9)}
+              {this.createTableRow(57, 9, 9.5, 10)}
+              {this.createTableRow(119, 10.5, 11, 11.5)}
+              {this.createTableRow(152, 12, 12.5, 13)}
               </tbody>
             </Table>
           </Col>
@@ -65,13 +69,25 @@ class App extends React.Component {
     }
   }
 
-  createTableRow = (layer_number, sec_wait) => {
+  /*
+  createRows = () => {
+    layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
+    var i, time_interval = 0.5;
+
+    layers.map( (l) =>  )
+
+    for(i = 0; i < layers.length; i++){
+
+    }
+  }
+  */
+  createTableRow = (layer_number, w1, w2, w3) => {
     console.log(layer_number)
     return <tr>
       <td><h3>Layer #{layer_number}</h3></td>
-      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_0.png'} sec_wait={sec_wait}/></td>
-      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_1.png'} sec_wait={sec_wait}/></td>
-      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_2.png'} sec_wait={sec_wait}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_0.png'} sec_wait={w1}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_1.png'} sec_wait={w2}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_2.png'} sec_wait={w3}/></td>
     </tr>
   }
 
