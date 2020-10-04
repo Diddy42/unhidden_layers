@@ -19,6 +19,19 @@ export async function sendImage(file){
     throw err;
 }
 
+export async function getInference(unique_id){
+	console.log('api.js - getInference called with ' + unique_id)
+	
+	const res = await fetch(url + 'inference/' + unique_id)
+	if(res.ok){
+		const resJ = await res.json();
+		return resJ;
+	}
+	
+	let err = {status: res.status, errObj:res};
+    throw err;
+}
+
 export async function testPing(){
     return new Promise((resolve, reject) => {
         fetch(url + 'test')

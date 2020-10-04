@@ -47,6 +47,43 @@ app.post('/sendImage', (req, res) => {
   })
 })
 
+app.get('/inference/:unique_id', (req, res) => {
+    console.log('received get inference for ' + req.params.unique_id)
+    const fileName = req.params.unique_id + '.txt'
+    
+    const filepath = path.resolve('../../model/extract_output/' + fileName)
+    
+    var sent = false;
+    var i = 0;
+    for(i = 0; i < 60 && !sent; i++){
+      try {
+        if (fs.existsSync(filepath)) {
+          const inference = fs.readFileSync(filepath);
+		  console.log('sending inference: ' + inference)
+    	  res.json({ inference : inference })
+          res.on('finish', function() {
+	      try {
+			fs.unlinkSync(filepath)
+          	console.log('deleted ' + filepath)
+	      } catch(e) {
+			console.log("error removing ", filepath); 
+	      }
+	 	 });
+          sent = true;
+        }
+      }catch(err) {
+
+      }
+      sleep(1000);
+    }
+
+    if(!sent){
+      console.log('server.js - get /features/:filename - file not found')
+      res.status(404)
+      res.end()
+    }
+})
+
 app.get('/test', (req, res) => {
     console.log('test')
 })

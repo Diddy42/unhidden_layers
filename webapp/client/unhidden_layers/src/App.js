@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Table from 'react-bootstrap/Table'
 import UploadImgButton from './UploadImgButton.js'
 import FeatureImg from './FeatureImg.js'
+import InferenceResult from './InferenceResult.js'
 
 class App extends React.Component {
   constructor(props){
@@ -22,6 +23,7 @@ class App extends React.Component {
         <Container fluid>
           <Row>
             <Col><UploadImgButton setId={this.setUniqueId}/></Col>
+            <Col><InferenceResult unique_id={this.state.unique_id}/></Col>
           </Row>
         </Container>
       </>
@@ -31,6 +33,7 @@ class App extends React.Component {
       <Container fluid>
         <Row>
           <Col><UploadImgButton setId={this.setUniqueId}/></Col>
+          <Col><InferenceResult unique_id={this.state.unique_id}/></Col>
         </Row>
 
         <Row>
