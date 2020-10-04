@@ -57,7 +57,7 @@ app.get('/features/:filename', (req, res) => {
     const filepath = path.resolve('../../model/extract_output/' + req.params.filename)
     var sent = false;
     var i = 0;
-    for(i = 0; i < 60; i++){
+    for(i = 0; i < 60 && !sent; i++){
       try {
         if (fs.existsSync(filepath)) {
           res.sendFile(filepath)
@@ -70,7 +70,6 @@ app.get('/features/:filename', (req, res) => {
 	      }
 	 	 });
           sent = true;
-          i = 61;
         }
       }catch(err) {
 

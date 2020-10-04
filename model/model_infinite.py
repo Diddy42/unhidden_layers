@@ -85,6 +85,12 @@ def new_image(mypath):
         return False
     else:
         return onlyfiles[0]
+        
+def clear_unprocessed(mypath):
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+    for f in onlyfiles:
+        print('removing ' + unprocessed_folder + '/' + f)
+        os.remove(unprocessed_folder + '/' + f)
 
 def process_img(file, m, unique_id, output_folder):
     inference = m.infer(file)
@@ -100,6 +106,8 @@ def process_img(file, m, unique_id, output_folder):
 m = Model()
 unprocessed_folder = 'unprocessed'
 output_folder = 'extract_output'
+
+clear_unprocessed(unprocessed_folder)
 
 while True:
     f = new_image(unprocessed_folder)

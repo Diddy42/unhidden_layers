@@ -46,12 +46,12 @@ class App extends React.Component {
               </thead>
 
               <tbody>
-                {this.createTableRow(2)}
-                {this.createTableRow(5)}
-                {this.createTableRow(9)}
-                {this.createTableRow(13)}
-                {this.createTableRow(17)}
-                {this.createTableRow(18)}
+                {this.createTableRow(2, 1)}
+                {this.createTableRow(5, 2)}
+                {this.createTableRow(9, 4)}
+                {this.createTableRow(13, 6)}
+                {this.createTableRow(17, 8)}
+                {this.createTableRow(18, 10)}
               </tbody>
             </Table>
           </Col>
@@ -62,13 +62,13 @@ class App extends React.Component {
     }
   }
 
-  createTableRow = (layer_number) => {
+  createTableRow = (layer_number, sec_wait) => {
     console.log(layer_number)
     return <tr>
       <td><h3>Layer #{layer_number}</h3></td>
-      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_0.png'}/></td>
-      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_1.png'}/></td>
-      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_2.png'}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_0.png'} sec_wait={sec_wait}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_1.png'} sec_wait={sec_wait}/></td>
+      <td><FeatureImg filename={this.state.unique_id+'_l' + layer_number + '_2.png'} sec_wait={sec_wait}/></td>
     </tr>
   }
 
