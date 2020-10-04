@@ -7,6 +7,7 @@ class UploadImgButton extends React.Component {
         return <>
             <h1>Upload image:</h1>
             <input type="file" id="fileUpload" />
+            <img id='your_img' src="#" alt='your uploaded image' width="50%" height="50%"/>
 
             <Button onClick={ () => this.handleClick() }>
                 Save
@@ -18,6 +19,8 @@ class UploadImgButton extends React.Component {
     handleClick = () => {
         console.log('uploadImgButton - i should upload the image now')
         this.props.setId(-1)
+        
+        document.getElementById('your_img').src = URL.createObjectURL(document.querySelector('#fileUpload').files[0])
         
         api.sendImage(document.querySelector('#fileUpload').files[0])
         .then((res) => {
