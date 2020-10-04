@@ -9,6 +9,7 @@ class InferenceResult extends React.Component{
 	  }
 	  
 	render(){
+		console.log('InferenceResult.js - render')
 		if(this.props.unique_id === -1){
 			return <>
 				
@@ -21,15 +22,19 @@ class InferenceResult extends React.Component{
 		}
 	}
 	
-	componentDidUpdate = () => {
+	componentDidUpdate = (prevProps) => {
 		if(this.props.unique_id !== -1){
 			console.log('getting inference')
 			api.getInference(this.props.unique_id)
 			.then((res) => {
             console.log('InferenceResult.js - getInference then')
             console.log(res.inference.toString())
-            //this.setState({ inference : res.inference })
+            this.setState({ inference : 'Prediction: ' + res.inference })
         })
+        
+        if(this.props.unique_id !== prevProps.unique_id){
+        	this.setState({ inference : '' })
+        }
 		}
 	}
 }

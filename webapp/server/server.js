@@ -59,8 +59,8 @@ app.get('/inference/:unique_id', (req, res) => {
       try {
         if (fs.existsSync(filepath)) {
           const inference = fs.readFileSync(filepath);
-		  console.log('sending inference: ' + inference)
-    	  res.json({ inference : inference })
+		  console.log('sending inference: ' + inference.toString())
+    	  res.json({ inference : inference.toString() })
           res.on('finish', function() {
 	      try {
 			fs.unlinkSync(filepath)
