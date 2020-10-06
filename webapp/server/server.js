@@ -53,10 +53,20 @@ app.post('/sendImage', (req, res) => {
   })
 })
 
+function timeout_rec(c, uId) {
+	console.log(c);
+	c = c + 1;
+	if(c < 30){
+		setTimeout((c, uId) => { timeout_rec(c, uId); }, 2000, c, uId);
+	}
+}
+
 app.get('/jsonresults/:unique_id', (req, res) => {
   console.log('received get jsonresults for ' + req.params.unique_id)
+  
+  var c = 0;
+  setTimeout((c, uId) => { timeout_rec(c, uId); }, 1000, c, req.params.unique_id);
 
-  //var img = base64_encode(path.resolve('../IMG_20200830_003104.jpg'))
   var done_waiting = false;
   var found = false;
   var i = 0;
