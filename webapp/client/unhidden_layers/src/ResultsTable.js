@@ -1,7 +1,21 @@
 import React from 'react';
+import Table from 'react-bootstrap/Table'
 
 class ResultsTable extends React.Component{
-
+    render(){
+            if(this.props.results === undefined){
+                return <>
+                    <Table>
+            
+                    </Table>
+            </>
+            }
+            else{
+                return <>
+                dsahdgsa
+                </>
+            }
+    }
 }
 
 /*

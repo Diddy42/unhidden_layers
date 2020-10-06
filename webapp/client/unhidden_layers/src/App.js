@@ -4,11 +4,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Table from 'react-bootstrap/Table'
 import UploadImgButton from './UploadImgButton.js'
 import FeatureImg from './FeatureImg.js'
 import InferenceResult from './InferenceResult.js'
 import * as api from './api.js'
+import ResultsTable from './ResultsTable.js'
 
 class App extends React.Component {
   constructor(props){
@@ -18,7 +18,7 @@ class App extends React.Component {
   }
 
   render(){
-    console.log(this.state)
+    //console.log(this.state)
 
     if(this.state.unique_id === -1){
       return <>
@@ -31,6 +31,21 @@ class App extends React.Component {
       </>
     }
     else{
+      return <>
+      <Container fluid>
+        <Row>
+          <Col><UploadImgButton setId={this.setUniqueId}/></Col>
+          <Col><InferenceResult unique_id={this.state.unique_id}/></Col>
+        </Row>
+
+        <Row>
+          <Col>
+            <ResultsTable results={this.state.json_results}/>
+          </Col>
+        </Row>
+        
+      </Container>
+    </>
       /*
       return <>
       <Container fluid>
@@ -72,17 +87,20 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount = () => {
-    api.getJsonResults(0)
-    .then((res) => {
-      console.log('getJsonResults then')
-      console.log(res)
-      this.setState({ json_results : res })
-    })
-    .catch((err) => {
-      console.log('getJsonResults catch')
-      console.log(err)
-    })
+  componentDidUpdate = (prevProps, prevState) => {
+    if(this.state.unique_id !== -1 && this.state.unique_id !== prevState.unique_id){
+      console.log('unique_id changed, getting results...')
+      api.getJsonResults(this.state.unique_id)
+      .then((res) => {
+        console.log('getJsonResults then')
+        //console.log(res)
+        this.setState({ json_results : res })
+      })
+      .catch((err) => {
+        console.log('getJsonResults catch')
+        console.log(err)
+      })
+    }
   }
 
   /*

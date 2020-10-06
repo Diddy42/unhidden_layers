@@ -87,13 +87,16 @@ def new_image(mypath):
     else:
         return onlyfiles[0]
         
-def clear_unprocessed(mypath):
+def clear_unprocessed(mypath, finished_file):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     for f in onlyfiles:
         print('removing ' + unprocessed_folder + '/' + f)
         os.remove(unprocessed_folder + '/' + f)
 
-def process_img(file, m, unique_id, output_folder):
+    f = open(finished_file, 'w')
+    f.close()
+
+def process_img(file, m, unique_id, output_folder, finished_file):
     inference = m.infer(file)
     
     f = open(output_folder + '/' + unique_id + '.txt', 'w')
@@ -104,11 +107,16 @@ def process_img(file, m, unique_id, output_folder):
 
     os.remove(file)
 
+    f = open(finished_file, 'a')
+    f.write(str(unique_id) + '\n')
+    f.close()
+
 m = Model()
 unprocessed_folder = 'unprocessed'
 output_folder = 'extract_output'
+finished_file = 'finished.txt'
 
-clear_unprocessed(unprocessed_folder)
+clear_unprocessed(unprocessed_folder, finished_file)
 
 while True:
     f = new_image(unprocessed_folder)
@@ -116,6 +124,6 @@ while True:
         time.sleep(5)
         print('new file: ' + f)
         unique_id = f.split('.')[0]
-        process_img(unprocessed_folder + '/' + f, m, unique_id, output_folder)
+        process_img(unprocessed_folder + '/' + f, m, unique_id, output_folder, finished_file)
     
     time.sleep(0.1)

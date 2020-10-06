@@ -7,7 +7,7 @@ class UploadImgButton extends React.Component {
         return <>
             <h1>Upload image:</h1>
             <input type="file" id="fileUpload" />
-            <img id='your_img' src="#" alt='your uploaded image' width="50%" height="50%"/>
+            <img id='your_img' src="#" alt=' ' width="50%" height="50%"/>
 
             <Button onClick={ () => this.handleClick() }>
                 Save

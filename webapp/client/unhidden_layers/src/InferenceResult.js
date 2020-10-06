@@ -21,7 +21,7 @@ class InferenceResult extends React.Component{
 			</>
 		}
 	}
-	
+	/*
 	componentDidUpdate = (prevProps) => {
 		if(this.props.unique_id !== -1){
 			console.log('getting inference')
@@ -37,6 +37,7 @@ class InferenceResult extends React.Component{
         }
 		}
 	}
+	*/
 }
 
 export default InferenceResult;
