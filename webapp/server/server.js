@@ -3,6 +3,12 @@ const fileupload = require('express-fileupload')
 const fs = require('fs')
 var path = require('path');
 var sleep = require('system-sleep');
+
+function base64_encode(file) {
+  var bitmap = fs.readFileSync(file);
+  return new Buffer.from(bitmap).toString('base64');
+}
+
 const app = new express()
 const port = 3001
 
@@ -45,6 +51,42 @@ app.post('/sendImage', (req, res) => {
     res.json({ unique_id : cnt })
     cnt++;
   })
+})
+
+app.get('/jsonresults/:unique_id', (req, res) => {
+  console.log('received get jsonresults for ' + req.params.unique_id)
+
+  var img = base64_encode(path.resolve('../IMG_20200830_003104.jpg'))
+  
+  
+  var json = 
+  {
+    layers_features : [
+      {
+        layer_number : 1,
+        features : [
+          'base64_img0',
+          'base64_img1',
+          'base64_img2'
+        ]
+      },
+      {
+        layer_number : 5,
+        features : [
+          'base64_img0',
+          'base64_img1',
+          'base64_img2'
+        ]
+      }
+    ],
+
+    inference : 'ubrella (69%)',
+
+    test_img : img
+  }
+
+  //console.log(JSON.stringify(json))
+  res.json(json)
 })
 
 app.get('/inference/:unique_id', (req, res) => {

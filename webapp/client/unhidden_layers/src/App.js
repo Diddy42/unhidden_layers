@@ -8,17 +8,18 @@ import Table from 'react-bootstrap/Table'
 import UploadImgButton from './UploadImgButton.js'
 import FeatureImg from './FeatureImg.js'
 import InferenceResult from './InferenceResult.js'
+import * as api from './api.js'
 
 class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {unique_id : -1};
+    this.state = {unique_id : -1, json_results : undefined};
   }
 
   render(){
     console.log(this.state)
-  
+
     if(this.state.unique_id === -1){
       return <>
         <Container fluid>
@@ -30,6 +31,7 @@ class App extends React.Component {
       </>
     }
     else{
+      /*
       return <>
       <Container fluid>
         <Row>
@@ -66,7 +68,21 @@ class App extends React.Component {
         
       </Container>
     </>
+    */
     }
+  }
+
+  componentDidMount = () => {
+    api.getJsonResults(0)
+    .then((res) => {
+      console.log('getJsonResults then')
+      console.log(res)
+      this.setState({ json_results : res })
+    })
+    .catch((err) => {
+      console.log('getJsonResults catch')
+      console.log(err)
+    })
   }
 
   /*

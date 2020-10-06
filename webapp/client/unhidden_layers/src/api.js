@@ -51,3 +51,16 @@ export async function testPing(){
         })
     })
 }
+
+export async function getJsonResults(unique_id){
+    console.log('api.js - getJsonResults called with ' + unique_id)
+	
+	const res = await fetch(url + 'jsonresults/' + unique_id)
+	if(res.ok){
+		const resJ = await res.json();
+		return resJ;
+	}
+	
+	let err = {status: res.status, errObj:res};
+    throw err;
+}
