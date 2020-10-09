@@ -54,9 +54,43 @@ app.post('/sendImage', (req, res) => {
 })
 
 function timeout_rec(c, uId) {
-	console.log(c);
+	//console.log(c + ' waiting for model to finish for id: ' + uId);
 	c = c + 1;
-	if(c < 30){
+	
+	var done = false;
+	finished = fs.readFileSync(path.resolve('../../model/finished.txt')).toString()
+	if(finished.split("\n").includes(uId.toString())){
+		done = true;
+		console.log('model finished for id: ' + uId)
+		
+		const layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
+		
+		var json = {
+			layers_features : [],
+			inference : ''
+		};
+		
+		var i;
+		for (i = 0; i < layers.length; i++){
+			console.log('layer ' + layers[i])
+			json.layers_features.push({
+				layer_number : layers[i],
+				features_b64 : [
+					base64_encode(path.resolve('../../model/extract_output/' + uId + '_l' + layers[i] + '_0.png')),
+					base64_encode(path.resolve('../../model/extract_output/' + uId + '_l' + layers[i] + '_1.png')),
+					base64_encode(path.resolve('../../model/extract_output/' + uId + '_l' + layers[i] + '_2.png'))
+				]
+			});
+		}
+		
+		json.inference = 'inferenceeeee'
+		
+		console.log(json)
+
+		res.json(json)
+	}
+	
+	if(c < 30 && !done){
 		setTimeout((c, uId) => { timeout_rec(c, uId); }, 2000, c, uId);
 	}
 }
@@ -67,10 +101,12 @@ app.get('/jsonresults/:unique_id', (req, res) => {
   var c = 0;
   setTimeout((c, uId) => { timeout_rec(c, uId); }, 1000, c, req.params.unique_id);
 
+	/*
   var done_waiting = false;
   var found = false;
   var i = 0;
   var finished;
+  
   for(i = 0; i < 60 && !done_waiting; i++){
     console.log('done one loop of waiting for model ' + req.params.unique_id)
     finished = fs.readFileSync(path.resolve('../../model/finished.txt')).toString()
@@ -81,44 +117,19 @@ app.get('/jsonresults/:unique_id', (req, res) => {
 
     sleep(1000) //use setTimeout to loop this and not this sleep
   }
-
+  
   console.log('done waiting, found: ' + found)
 
   if(found){
-    const layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
-
-    var json = 
-    {
-      layers_features : [
-        {
-          layer_number : 1,
-          features_b64 : [
-            base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l1_0.png')),
-            base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l1_1.png')),
-            base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l1_2.png'))
-          ]
-        },
-        {
-          layer_number : 4,
-          features : [
-            base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l4_0.png')),
-            base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l4_1.png')),
-            base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l4_2.png'))
-          ]
-        }
-      ],
-
-      inference : 'ubrella (69%)'
-    }
-
-    res.json(json)
+    
   }
   else{
     res.writeHead(500, {
       'Content-Type': 'application/json'
     })
-    res.end(JSON.stringify({ status: 'error', message: error }))
+    res.end(JSON.stringify({ status: 'error', message: 'error in finding features' }))
   }
+  */
 })
 
 app.get('/inference/:unique_id', (req, res) => {
