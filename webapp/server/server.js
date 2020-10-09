@@ -128,7 +128,7 @@ app.get('/jsonresults/:unique_id', (req, res) => {
   if(found){
     console.log('model finished for id: ' + req.params.unique_id)
 		
-		const layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
+		const layers = [1, 4, 12];
 		
 		var json = {
 			layers_features : [],

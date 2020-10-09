@@ -29,7 +29,8 @@ class Model:
 
     def extract(self, img_filename, unique_id):
         self.printLayers()
-        significant_layers = [1, 4, 12, 19, 30, 44, 57, 119, 152]
+        #significant_layers = [1, 4, 12, 19, 30, 44, 57, 119, 152]
+        significant_layers = [1, 4, 12]
 
         for sl in significant_layers:
             print('now doing layer ' + str(sl))
