@@ -6,6 +6,8 @@ class ResultsTable extends React.Component{
     		console.log(this.props.results)
             if(this.props.results === undefined){
                 return <>
+                	{this.props.gif !== undefined && <img src={'data:image/gif;base64,' + this.props.gif} alt=''/>}
+                
                     <Table>
             
                     </Table>
@@ -13,7 +15,7 @@ class ResultsTable extends React.Component{
             }
             else{
                 return <>
-                {this.createTable()}
+                	{this.createTable()}
                 </>
             }
     }

@@ -14,7 +14,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = {unique_id : -1, json_results : undefined};
+    this.state = {unique_id : -1, json_results : undefined, gif : undefined};
   }
 
   render(){
@@ -40,7 +40,7 @@ class App extends React.Component {
 
         <Row>
           <Col>
-            <ResultsTable results={this.state.json_results}/>
+            <ResultsTable results={this.state.json_results} gif={this.state.gif}/>
           </Col>
         </Row>
         
@@ -59,6 +59,7 @@ class App extends React.Component {
         this.setState({ json_results : res })
       })
       .catch((err) => {
+      	this.setState({gif : undefined})  //maybe show an error, this only removes the loading gif
         console.log('getJsonResults catch')
         console.log(err)
       })
@@ -76,12 +77,12 @@ class App extends React.Component {
     </tr>
   }
 
-  setUniqueId = (id) => {
+  setUniqueId = (id, gif) => {
     if(id === -1){
     	this.setState({ unique_id : id, json_results : undefined });
     }
     else{
-    	this.setState({ unique_id : id });
+    	this.setState({ unique_id : id, gif : gif });
     }
   }
 }

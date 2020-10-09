@@ -48,7 +48,10 @@ app.post('/sendImage', (req, res) => {
       }
 
     console.log('saved file with unique id ' + cnt)
-    res.json({ unique_id : cnt })
+    res.json({ 
+    	unique_id : cnt, 
+    	load_gif : base64_encode(path.resolve('images/loading2.gif'))
+     })
     cnt++;
   })
 })

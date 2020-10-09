@@ -18,14 +18,14 @@ class UploadImgButton extends React.Component {
 
     handleClick = () => {
         console.log('uploadImgButton - i should upload the image now')
-        this.props.setId(-1)
+        this.props.setId(-1, undefined)
         
         document.getElementById('your_img').src = URL.createObjectURL(document.querySelector('#fileUpload').files[0])
         
         api.sendImage(document.querySelector('#fileUpload').files[0])
         .then((res) => {
             console.log('uploadImgButton.js - handleClick - sendImage then')
-            this.props.setId(res.unique_id)
+            this.props.setId(res.unique_id, res.load_gif)
         })
     }
 }
