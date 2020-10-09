@@ -53,15 +53,16 @@ app.post('/sendImage', (req, res) => {
   })
 })
 
-function timeout_rec(c, uId) {
-	//console.log(c + ' waiting for model to finish for id: ' + uId);
+/*
+function timeout_rec(c, req, res) {
+	console.log(c + ' waiting for model to finish for id: ' + req.params.unique_id);
 	c = c + 1;
 	
 	var done = false;
 	finished = fs.readFileSync(path.resolve('../../model/finished.txt')).toString()
-	if(finished.split("\n").includes(uId.toString())){
+	if(finished.split("\n").includes(req.params.unique_id.toString())){
 		done = true;
-		console.log('model finished for id: ' + uId)
+		console.log('model finished for id: ' + req.params.unique_id)
 		
 		const layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
 		
@@ -76,9 +77,9 @@ function timeout_rec(c, uId) {
 			json.layers_features.push({
 				layer_number : layers[i],
 				features_b64 : [
-					base64_encode(path.resolve('../../model/extract_output/' + uId + '_l' + layers[i] + '_0.png')),
-					base64_encode(path.resolve('../../model/extract_output/' + uId + '_l' + layers[i] + '_1.png')),
-					base64_encode(path.resolve('../../model/extract_output/' + uId + '_l' + layers[i] + '_2.png'))
+					base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_0.png')),
+					base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_1.png')),
+					base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_2.png'))
 				]
 			});
 		}
@@ -90,18 +91,22 @@ function timeout_rec(c, uId) {
 		res.json(json)
 	}
 	
-	if(c < 30 && !done){
-		setTimeout((c, uId) => { timeout_rec(c, uId); }, 2000, c, uId);
+	console.log('calling the next timeout')
+	
+	if(!done){
+		console.log('calling the next timeout')
+		res.setTimeout(2000, (c) => { timeout_rec(c, req, res); }, c);
 	}
 }
+*/
 
 app.get('/jsonresults/:unique_id', (req, res) => {
   console.log('received get jsonresults for ' + req.params.unique_id)
   
-  var c = 0;
-  setTimeout((c, uId) => { timeout_rec(c, uId); }, 1000, c, req.params.unique_id);
+  /*var c = 0;
+  res.setTimeout(2000, (c) => { timeout_rec(c, req, res); });*/
 
-	/*
+	
   var done_waiting = false;
   var found = false;
   var i = 0;
@@ -115,13 +120,42 @@ app.get('/jsonresults/:unique_id', (req, res) => {
       found = true;
     }
 
-    sleep(1000) //use setTimeout to loop this and not this sleep
+    sleep(2000)
   }
   
   console.log('done waiting, found: ' + found)
 
   if(found){
-    
+    console.log('model finished for id: ' + req.params.unique_id)
+		
+		const layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
+		
+		var json = {
+			layers_features : [],
+			inference : ''
+		};
+		
+		var i;
+		for (i = 0; i < layers.length; i++){
+			console.log('layer ' + layers[i])
+			json.layers_features.push({
+				layer_number : layers[i],
+				features_b64 : [
+					base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_0.png')),
+					base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_1.png')),
+					base64_encode(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_2.png'))
+				]
+			});
+			
+			fs.unlinkSync(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_0.png'))
+			fs.unlinkSync(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_1.png'))
+			fs.unlinkSync(path.resolve('../../model/extract_output/' + req.params.unique_id + '_l' + layers[i] + '_2.png'))
+		}
+		
+		json.inference = fs.readFileSync(path.resolve('../../model/extract_output/' + req.params.unique_id + '.txt')).toString()
+		fs.unlinkSync(path.resolve('../../model/extract_output/' + req.params.unique_id + '.txt'))
+
+		res.json(json)
   }
   else{
     res.writeHead(500, {
@@ -129,7 +163,7 @@ app.get('/jsonresults/:unique_id', (req, res) => {
     })
     res.end(JSON.stringify({ status: 'error', message: 'error in finding features' }))
   }
-  */
+  
 })
 
 app.get('/inference/:unique_id', (req, res) => {
