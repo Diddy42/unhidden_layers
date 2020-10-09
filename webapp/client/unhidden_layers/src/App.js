@@ -25,7 +25,7 @@ class App extends React.Component {
         <Container fluid>
           <Row>
             <Col><UploadImgButton setId={this.setUniqueId}/></Col>
-            <Col><InferenceResult unique_id={this.state.unique_id}/></Col>
+            <Col><InferenceResult results={this.state.json_results}/></Col>
           </Row>
         </Container>
       </>
@@ -35,7 +35,7 @@ class App extends React.Component {
       <Container fluid>
         <Row>
           <Col><UploadImgButton setId={this.setUniqueId}/></Col>
-          <Col><InferenceResult unique_id={this.state.unique_id}/></Col>
+          <Col><InferenceResult results={this.state.json_results}/></Col>
         </Row>
 
         <Row>
@@ -46,44 +46,6 @@ class App extends React.Component {
         
       </Container>
     </>
-      /*
-      return <>
-      <Container fluid>
-        <Row>
-          <Col><UploadImgButton setId={this.setUniqueId}/></Col>
-          <Col><InferenceResult unique_id={this.state.unique_id}/></Col>
-        </Row>
-
-        <Row>
-          <Col>
-            <Table striped bordered hover>
-              <thead>
-                <tr>
-                  <th>Layer number</th>
-                  <th>Random output of this layer</th>
-                  <th>Random output of this layer</th>
-                  <th>Random output of this layer</th>
-                </tr>
-              </thead>
-
-              <tbody>
-              {this.createTableRow(1, 0.5, 1, 1.5)}
-              {this.createTableRow(4, 2, 2.5, 3)}
-              {this.createTableRow(12, 3.5, 4, 4.5)}
-              {this.createTableRow(19, 5, 5.5, 6)}
-              {this.createTableRow(30, 6.5, 7, 7.5)}
-              {this.createTableRow(44, 8, 8.5, 9)}
-              {this.createTableRow(57, 9, 9.5, 10)}
-              {this.createTableRow(119, 10.5, 11, 11.5)}
-              {this.createTableRow(152, 12, 12.5, 13)}
-              </tbody>
-            </Table>
-          </Col>
-        </Row>
-        
-      </Container>
-    </>
-    */
     }
   }
 
@@ -103,18 +65,7 @@ class App extends React.Component {
     }
   }
 
-  /*
-  createRows = () => {
-    layers = [1, 4, 12, 19, 30, 44, 57, 119, 152];
-    var i, time_interval = 0.5;
-
-    layers.map( (l) =>  )
-
-    for(i = 0; i < layers.length; i++){
-
-    }
-  }
-  */
+  
   createTableRow = (layer_number, w1, w2, w3) => {
     console.log(layer_number)
     return <tr>
@@ -126,7 +77,12 @@ class App extends React.Component {
   }
 
   setUniqueId = (id) => {
-    this.setState({ unique_id : id });
+    if(id === -1){
+    	this.setState({ unique_id : id, json_results : undefined });
+    }
+    else{
+    	this.setState({ unique_id : id });
+    }
   }
 }
 

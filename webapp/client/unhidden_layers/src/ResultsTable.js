@@ -40,18 +40,14 @@ class ResultsTable extends React.Component{
 	
 	createRow = (layer_feature) => {
 		console.log(layer_feature)
-		return <tr>
+		const size = 70;
+		return <tr key={layer_feature.layer_number}>
 			<td><h3>{layer_feature.layer_number}</h3></td>
-			<td><img src={'data:image/png;base64,' + layer_feature.features_b64[0]}/></td>
-			<td><img src={'data:image/png;base64,' + layer_feature.features_b64[1]}/></td>
-			<td><img src={'data:image/png;base64,' + layer_feature.features_b64[2]}/></td>
+			<td><img src={'data:image/png;base64,' + layer_feature.features_b64[0]} alt='' width={size + "%"} height={size + "%"}/></td>
+			<td><img src={'data:image/png;base64,' + layer_feature.features_b64[1]} alt='' width={size + "%"} height={size + "%"}/></td>
+			<td><img src={'data:image/png;base64,' + layer_feature.features_b64[2]} alt='' width={size + "%"} height={size + "%"}/></td>
 		</tr>
 	}
 }
-
-/*
-display base64 image:
-    <img src={'data:image/png;base64,' + this.state.json_results.test_img}/>
-*/
 
 export default ResultsTable;
