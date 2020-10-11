@@ -103,6 +103,7 @@ def process_img(file, m, unique_id, output_folder):
 
     os.remove(file)
 
+
 m = Model()
 unprocessed_folder = 'unprocessed'
 output_folder = 'extract_output'
