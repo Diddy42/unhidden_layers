@@ -9,6 +9,9 @@ https://docs.docker.com/language/python/build-images/
 import random
 from flask import Flask
 from os import environ
+from mobilenet import Model
+from utils import print_current_RAM_usage
+
 app = Flask(__name__)
 
 '''@app.before_first_request
@@ -18,7 +21,7 @@ def before_first_request_func():
 @app.route('/')
 def home_page():
     r = random.randint(0, 100)
-    return 'your random number (1, 100): ' + str(r)
+    return model.get_middle_output_image()
 
 def init():
     print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
@@ -26,6 +29,13 @@ def init():
     
 
 init()
+
+print_current_RAM_usage()
+
+model = Model()
+
+print_current_RAM_usage()
+
 port = environ.get("PORT", 5000)
 print('port: ' + str(port))
 app.run(host='0.0.0.0', port=port)

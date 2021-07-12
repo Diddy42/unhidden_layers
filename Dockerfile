@@ -5,6 +5,11 @@ FROM python:3
 #if you leave the RUN and COPY, it will get the code from the local directory
 
 RUN pip3 install Flask
+RUN pip3 install keras
+RUN pip3 install tensorflow
+RUN pip3 install matplotlib
+
+#RUN pip install --upgrade keras keras-applications
 
 #RUN git clone https://github.com/Diddy42/unhidden_layers.git
 
@@ -15,3 +20,4 @@ WORKDIR /unhidden_layers/python_webserver/
 
 #CMD ["python3", "-m" , "flask", "run", "--host=0.0.0.0"]
 CMD ["python3", "app.py"]
+#CMD pip list | grep Keras
