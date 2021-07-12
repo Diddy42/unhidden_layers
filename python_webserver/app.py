@@ -21,10 +21,11 @@ def home_page():
     return 'your random number (1, 100): ' + str(r)
 
 def init():
-    print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
-    port = environ.get("PORT", 5000)
-    print('port: ' + str(port))
+    print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
+    
     
 
 init()
-app.run(host='0.0.0.0')
+port = environ.get("PORT", 5000)
+print('port: ' + str(port))
+app.run(host='0.0.0.0', port=port)
