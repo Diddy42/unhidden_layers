@@ -31,7 +31,9 @@ class Model:
         return '%s (%.2f%%)' % (label[1], label[2] * 100)
 
     def extract(self, img_filename, unique_id):
-        self.printLayers()
+        result_json = {}
+
+        #self.printLayers()
         #significant_layers = [1, 4, 12, 19, 30, 44, 57, 119, 152]
         significant_layers = [1, 12, 30, 57, 119, 152]
 
@@ -48,6 +50,8 @@ class Model:
             #now pred has shape like (112, 112, 128), which correspond to 128 images 112x112
             pred = np.dsplit(pred, numFilters)
             #now pred is a list of 112x112 images  (or whatever specific number)
+
+            result_json['layer_' + str(sl)] = []
             
             n = 3
             for i in range(n):
@@ -64,10 +68,18 @@ class Model:
                     arr_img = arr_img / maxa
                     arr_img = arr_img * 255 
 
+                result_json['layer_' + str(sl)].append(arr_img)
+
+                
+                
+                '''
                 plt.figure()
                 plt.imshow(arr_img)
                 plt.savefig('./extract_output/' + str(unique_id)+'_' + 'l'+str(sl)+'_' + str(i) + '.png')
                 plt.close()
+                '''
+
+        return result_json
         
 
     def printLayers(self):
@@ -85,7 +97,15 @@ class Model:
         return image
 
     def get_middle_output_image(self):
-        return 'yoooo test'
+        filename = '1.jpg'
+
+        print('starting extraction of middle layers...')
+
+        js = self.extract(filename, 1)
+
+        print('finished extraction')
+
+        return 'AAAAAAAAAAAA'
 
 def new_image(mypath):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]

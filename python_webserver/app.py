@@ -6,11 +6,11 @@ https://docs.docker.com/language/python/build-images/
 
 #you can see it on http://localhost:5000
 
-import random
 from flask import Flask
 from os import environ
 from mobilenet import Model
 from utils import print_current_RAM_usage
+import time
 
 app = Flask(__name__)
 
@@ -20,8 +20,13 @@ def before_first_request_func():
 
 @app.route('/')
 def home_page():
-    r = random.randint(0, 100)
-    return model.get_middle_output_image()
+    st = time.time()
+    res = model.get_middle_output_image()
+    end = time.time()
+
+    print('result calculated in ' + str(round(end - st, 1)) + ' sec')
+
+    return 'result calculated in ' + str(round(end - st, 1)) + ' sec'
 
 def init():
     print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
