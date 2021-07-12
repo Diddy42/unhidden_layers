@@ -8,6 +8,7 @@ https://docs.docker.com/language/python/build-images/
 
 import random
 from flask import Flask
+from os import environ
 app = Flask(__name__)
 
 '''@app.before_first_request
@@ -20,7 +21,9 @@ def home_page():
     return 'your random number (1, 100): ' + str(r)
 
 def init():
-    print('AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+    print('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB')
+    port = environ.get("PORT", 5000)
+    print('port: ' + str(port))
     
 
 init()
