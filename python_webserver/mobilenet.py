@@ -108,7 +108,9 @@ class Model:
         return json_obj
 
     def get_a_string(self):
-        return 'a string!'
+        print('test logging mobilenet.py')
+        r = random.randint(0, 100)
+        return 'a string! ' + str(r)
 
 def new_image(mypath):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]

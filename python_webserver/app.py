@@ -44,6 +44,7 @@ def home_page():
 
 @app.route('/test_request')
 def test_req():
+    print('test logging app.py')
     res = model.get_a_string()
     return res
 

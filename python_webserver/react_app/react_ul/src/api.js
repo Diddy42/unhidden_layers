@@ -6,7 +6,7 @@ export async function testRequest(){
         .then((response) => {
             if(response.ok){
                 console.log(response)
-                resolve();
+                resolve(response);
             }
             else{
                 console.log('response not ok' + response)
