@@ -48,6 +48,8 @@ def home_page():
 def test_req():
     print('test logging app.py')
 
+    global num_current_requests
+
     lock_for_var.acquire()
     if num_current_requests >= 2:  #can't serve request
         lock_for_var.release()
