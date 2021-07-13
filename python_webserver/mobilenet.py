@@ -13,6 +13,7 @@ import time
 from os import listdir
 from os.path import isfile, join
 import os
+import json
 
 class Model:
     def __init__(self):
@@ -110,7 +111,12 @@ class Model:
     def get_a_string(self):
         print('test logging mobilenet.py')
         r = random.randint(0, 100)
-        return 'a string! ' + str(r)
+
+        dict_obj = {}
+        dict_obj['string'] = 'a string!'
+        dict_obj['number'] = r
+
+        return json.dumps(dict_obj)
 
 def new_image(mypath):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]

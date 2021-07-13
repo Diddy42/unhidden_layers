@@ -17,7 +17,7 @@ class App extends React.Component {
   }
 
   handleClick = () => {
-    api.testRequest()
+    api.testRequestJson()
     .then((res) => {
       console.log('testRequest then')
       console.log(res)

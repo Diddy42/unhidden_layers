@@ -1,17 +1,11 @@
 const url = 'https://unhidden-layers.herokuapp.com/'
 
-export async function testRequest(){
+export async function testRequestJson(){
     return new Promise((resolve, reject) => {
         fetch(url + 'test_request')
-        .then((response) => {
-            if(response.ok){
-                console.log(response)
-                resolve(response);
-            }
-            else{
-                console.log('response not ok' + response)
-                reject(response);
-            }
+        .then(response => response.json())
+        .then((data) => {
+            resolve(data)
         })
         .catch((err) => {
             console.log('could not connect to server' + err)
