@@ -25,6 +25,7 @@ from os import environ
 from mobilenet import Model
 from utils import print_current_RAM_usage, send_text
 import time
+import threading
 
 app = Flask(__name__, static_folder="react_app/react_ul/build/static", template_folder="react_app/react_ul/build")
 
@@ -45,7 +46,9 @@ def home_page():
 @app.route('/test_request')
 def test_req():
     print('test logging app.py')
+    lock.acquire()
     res = model.get_a_string()
+    lock.release()
     return res
 
 def init():
@@ -58,6 +61,7 @@ init()
 
 print_current_RAM_usage()
 
+lock = threading.Lock()
 model = Model()
 
 print_current_RAM_usage()

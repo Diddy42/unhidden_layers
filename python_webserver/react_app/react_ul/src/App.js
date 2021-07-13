@@ -23,6 +23,8 @@ class App extends React.Component {
   }
 
   handleClick = () => {
+    this.setState({ cnt: -1 });
+
     api.testRequestJson()
     .then((res) => {
       console.log('testRequest then')
