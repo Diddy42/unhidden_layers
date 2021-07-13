@@ -22,6 +22,8 @@ class Model:
         self.model = tf.keras.applications.MobileNetV2(weights='imagenet')
         #self.printLayers()
 
+        self.cnt = 0
+
     def infer(self, img_filename):
         image = self.input_preprocess(img_filename)
         yhat = self.model.predict(image)
@@ -110,11 +112,12 @@ class Model:
 
     def get_a_string(self):
         print('test logging mobilenet.py')
-        r = random.randint(0, 100)
 
         dict_obj = {}
         dict_obj['string'] = 'a string!'
-        dict_obj['number'] = r
+        dict_obj['number'] = self.cnt
+
+        self.cnt = self.cnt + 1
 
         return json.dumps(dict_obj)
 

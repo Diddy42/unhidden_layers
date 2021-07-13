@@ -6,11 +6,17 @@ import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
+  constructor(props){
+    super(props);
+
+    this.state = { cnt: 0 };
+  }
+
   render(){
     return (
       <Container>
         <Button onClick={this.handleClick}>
-          AAAAAAA
+          {this.state.cnt}
         </Button>
       </Container>
     );
@@ -21,6 +27,8 @@ class App extends React.Component {
     .then((res) => {
       console.log('testRequest then')
       console.log(res)
+
+      this.setState({ cnt: res.number });
     })
     .catch((err) => {
       console.log('testRequest catch')
