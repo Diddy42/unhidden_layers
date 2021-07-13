@@ -52,7 +52,7 @@ init()
 
 print_current_RAM_usage()
 
-#model = Model()
+model = Model()
 
 print_current_RAM_usage()
 
