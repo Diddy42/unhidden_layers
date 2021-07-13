@@ -64,4 +64,4 @@ print_current_RAM_usage()
 
 port = environ.get("PORT", 5000)
 print('port: ' + str(port))
-app.run(host='0.0.0.0', port=port)
+app.run(host='0.0.0.0', port=port, threaded=True)

@@ -117,6 +117,8 @@ class Model:
         dict_obj['string'] = 'a string!'
         dict_obj['number'] = self.cnt
 
+        time.sleep(5)
+
         self.cnt = self.cnt + 1
 
         return json.dumps(dict_obj)
