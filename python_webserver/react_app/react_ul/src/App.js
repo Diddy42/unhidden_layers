@@ -1,8 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
+import * as api from './api.js'
 
 function App() {
   console.log("test log")
+
+  api.testRequest()
+  .then((res) => {
+    console.log('testRequest then')
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log('testRequest catch')
+    console.log(err)
+  })
+
+
   return (
     <div className="App">
       <header className="App-header">
