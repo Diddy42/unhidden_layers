@@ -101,11 +101,14 @@ class Model:
 
         print('starting extraction of middle layers...')
 
-        js = self.extract(filename, 1)
+        json_obj = self.extract(filename, 1)
 
         print('finished extraction')
 
-        return 'AAAAAAAAAAAA'
+        return json_obj
+
+    def get_a_string(self):
+        return 'a string!'
 
 def new_image(mypath):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]

@@ -42,6 +42,11 @@ def home_page():
 
     return render_template('index.html')
 
+@app.route('/test_request')
+def test_req():
+    res = model.get_a_string()
+    return res
+
 def init():
     print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
     send_text('unhidden_layers started up!')
