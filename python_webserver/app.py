@@ -23,7 +23,7 @@ unhidden_layers_1  | static
 from flask import Flask, render_template
 from os import environ
 from mobilenet import Model
-from utils import print_current_RAM_usage
+from utils import print_current_RAM_usage, send_text
 import time
 
 app = Flask(__name__, static_folder="react_app/react_ul/build/static", template_folder="react_app/react_ul/build")
@@ -44,6 +44,7 @@ def home_page():
 
 def init():
     print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
+    send_text('unhidden_layers started up!')
     
     
 
