@@ -41,12 +41,14 @@ def before_first_request_func():
 def home_page():
     return render_template('index.html')
 
-@app.route('/extract_from_image')
+@app.route('/extract_from_image', methods = ['POST'])
 def extract_from_image():
     print('test logging app.py')
 
+    imgFile = request.form['imgFile']
+
     if lock.acquire(blocking=False):  #lock is free, i can enter
-        dict_obj = model.get_middle_output_image()
+        dict_obj = model.get_middle_output_image(imgFile)
         lock.release()
 
         dict_obj['result'] = 'success'

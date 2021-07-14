@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResultsTable from './ResultsTable.js';
+import UploadImgButton from './UploadImgButton.js';
 
 class App extends React.Component {
   constructor(props){
@@ -19,6 +20,8 @@ class App extends React.Component {
   render(){
     return (
       <Container>
+        <UploadImgButton/>
+
         <Button 
           onClick={this.handleClick}
           disabled={this.state.request_status.localeCompare("pending") === 0}
@@ -33,9 +36,16 @@ class App extends React.Component {
   }
 
   handleClick = () => {
+    var imgFile = document.querySelector('#fileUpload').files[0];
+
+    if(imgFile === undefined){
+      console.log("the user did not select an image yet!");
+      return;
+    }
+
     this.setState({ request_status: "pending" });
 
-    api.extractFromImage()
+    api.extractFromImage(imgFile)
     .then((res) => {
       console.log(res)
 
