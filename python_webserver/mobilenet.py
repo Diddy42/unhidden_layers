@@ -77,7 +77,7 @@ class Model:
                 
                 pil_img = Image.fromarray(arr_img)
                 buff = BytesIO()
-                pil_img.save(buff, format="JPEG")
+                pil_img.save(buff, format="PNG")
                 b64_image_string = base64.b64encode(buff.getvalue()).decode("utf-8")
 
                 result_dict['layer_' + str(sl)].append(b64_image_string)
