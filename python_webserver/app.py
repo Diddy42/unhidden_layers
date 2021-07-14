@@ -39,22 +39,19 @@ def before_first_request_func():
 
 @app.route('/')
 def home_page():
-    st = time.time()
-    #res = model.get_middle_output_image()
-    end = time.time()
-
-    print('result calculated in ' + str(round(end - st, 1)) + ' sec')
-
     return render_template('index.html')
 
-@app.route('/test_request')
-def test_req():
+@app.route('/extract_from_image')
+def extract_from_image():
     print('test logging app.py')
 
     if lock.acquire(blocking=False):  #lock is free, i can enter
-        res = model.get_a_string()
+        dict_obj = model.get_middle_output_image()
         lock.release()
-        return res
+
+        dict_obj['result'] = 'success'
+
+        return json.dumps(dict_obj)
     else: #lock was already taken
         return json.dumps({'result': 'server_too_busy'})
 

@@ -9,32 +9,44 @@ class App extends React.Component {
   constructor(props){
     super(props);
 
-    this.state = { cnt: 0 };
+    this.state = { 
+      request_status: "not_requested",
+      data_received: undefined
+     };
   }
 
   render(){
     return (
       <Container>
-        <Button onClick={this.handleClick}>
-          {this.state.cnt}
+        <Button 
+          onClick={this.handleClick}
+          disabled={this.state.request_status.localeCompare("pending") === 0}
+        >
+          {this.state.request_status.localeCompare("pending") === 0 && "Waiting for server"}
+          {this.state.request_status.localeCompare("pending") !== 0 && "Extract!"}
         </Button>
       </Container>
     );
   }
 
   handleClick = () => {
-    this.setState({ cnt: -1 });
+    this.setState({ request_status: "pending" });
 
-    api.testRequestJson()
+    api.extractFromImage()
     .then((res) => {
-      console.log('testRequest then')
       console.log(res)
 
-      this.setState({ cnt: res.number });
+      if(res.result.localeCompare("success")){
+        this.setState({ request_status: "success", data_received: res });
+      }
+      else{
+        this.setState({ request_status: "server_too_busy" });
+      }
     })
     .catch((err) => {
       console.log('testRequest catch')
       console.log(err)
+      this.setState({ request_status: "connection_error" });
     })
   }
   

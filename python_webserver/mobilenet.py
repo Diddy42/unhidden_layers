@@ -34,7 +34,7 @@ class Model:
         return '%s (%.2f%%)' % (label[1], label[2] * 100)
 
     def extract(self, img_filename, unique_id):
-        result_json = {}
+        result_dict = {}
 
         #self.printLayers()
         #significant_layers = [1, 4, 12, 19, 30, 44, 57, 119, 152]
@@ -54,7 +54,7 @@ class Model:
             pred = np.dsplit(pred, numFilters)
             #now pred is a list of 112x112 images  (or whatever specific number)
 
-            result_json['layer_' + str(sl)] = []
+            result_dict['layer_' + str(sl)] = []
             
             n = 3
             for i in range(n):
@@ -71,7 +71,7 @@ class Model:
                     arr_img = arr_img / maxa
                     arr_img = arr_img * 255 
 
-                result_json['layer_' + str(sl)].append(arr_img)
+                result_dict['layer_' + str(sl)].append(arr_img)
 
                 
                 
@@ -82,7 +82,7 @@ class Model:
                 plt.close()
                 '''
 
-        return result_json
+        return result_dict
         
 
     def printLayers(self):
@@ -104,11 +104,11 @@ class Model:
 
         print('starting extraction of middle layers...')
 
-        json_obj = self.extract(filename, 1)
+        dict_obj = self.extract(filename, 1)
 
         print('finished extraction')
 
-        return json_obj
+        return dict_obj
 
     def get_a_string(self):
         print('test logging mobilenet.py')
