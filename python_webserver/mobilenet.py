@@ -73,7 +73,7 @@ class Model:
                     arr_img = arr_img * 255 
 
                 b64_img = base64.b64encode(arr_img)
-                result_dict['layer_' + str(sl)].append(arr_img)
+                result_dict['layer_' + str(sl)].append(b64_img)
 
                 
                 
