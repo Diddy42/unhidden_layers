@@ -15,6 +15,8 @@ from os.path import isfile, join
 import os
 import json
 import base64
+from io import BytesIO
+from PIL import Image
 
 class Model:
     def __init__(self):
@@ -72,8 +74,13 @@ class Model:
                     arr_img = arr_img / maxa
                     arr_img = arr_img * 255 
 
-                b64_img = base64.b64encode(arr_img)
-                result_dict['layer_' + str(sl)].append(b64_img)
+                
+                pil_img = Image.fromarray(arr_img)
+                buff = BytesIO()
+                pil_img.save(buff, format="JPEG")
+                b64_image_string = base64.b64encode(buff.getvalue()).decode("utf-8")
+
+                result_dict['layer_' + str(sl)].append(b64_image_string)
 
                 
                 
