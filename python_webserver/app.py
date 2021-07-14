@@ -45,7 +45,10 @@ def home_page():
 def extract_from_image():
     print('test logging app.py')
 
-    imgFile = request.form['imgFile']
+    #imgFile = request.form['imgFile']
+    imgFile = 'AAAA'
+    data = request.get_data(as_text=True)
+    send_text(data)
 
     if lock.acquire(blocking=False):  #lock is free, i can enter
         dict_obj = model.get_middle_output_image(imgFile)
