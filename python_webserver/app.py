@@ -27,7 +27,6 @@ from utils import print_current_RAM_usage, send_text
 import time
 import threading
 import json
-#from SharedCounter import SharedCounter
 
 app = Flask(__name__, static_folder="react_app/react_ul/build/static", template_folder="react_app/react_ul/build")
 
@@ -49,29 +48,13 @@ def home_page():
 def test_req():
     print('test logging app.py')
 
-    '''
-    lock_for_cnt.acquire()
-    if sh_cnt.get_value() >= 2:  #can't serve request
-        lock_for_cnt.release()
-        return json.dumps({'result': 'server_too_busy'})
-
-    lock_for_cnt.release()
-    
-    sh_cnt.increase()
-    '''
-
-    if lock.acquire(blocking=False):  #lock was free, i can enter
+    if lock.acquire(blocking=False):  #lock is free, i can enter
         res = model.get_a_string()
         lock.release()
         return res
     else: #lock was already taken
         return json.dumps({'result': 'server_too_busy'})
 
-
-
-    #sh_cnt.decrease()
-
-    #return res
 
 def init():
     print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
@@ -84,9 +67,6 @@ init()
 print_current_RAM_usage()
 
 lock = threading.Lock()
-
-#lock_for_cnt = threading.Lock()
-#sh_cnt = SharedCounter(0, lock_for_cnt)
 
 model = Model()
 

@@ -116,6 +116,7 @@ class Model:
         dict_obj = {}
         dict_obj['string'] = 'a string!'
         dict_obj['number'] = self.cnt
+        dict_obj['result'] = 'success'
 
         time.sleep(5)
 
