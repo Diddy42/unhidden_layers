@@ -4,6 +4,7 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import ResultsTable from './ResultsTable.js';
 
 class App extends React.Component {
   constructor(props){
@@ -25,6 +26,8 @@ class App extends React.Component {
           {this.state.request_status.localeCompare("pending") === 0 && "Waiting for server"}
           {this.state.request_status.localeCompare("pending") !== 0 && "Extract!"}
         </Button>
+
+        <ResultsTable data={this.state.data_received} status={this.state.request_status} />
       </Container>
     );
   }
@@ -36,7 +39,7 @@ class App extends React.Component {
     .then((res) => {
       console.log(res)
 
-      if(res.result.localeCompare("success")){
+      if(res.result.localeCompare("success") === 0){
         this.setState({ request_status: "success", data_received: res });
       }
       else{
