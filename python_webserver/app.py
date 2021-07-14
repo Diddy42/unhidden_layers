@@ -28,6 +28,7 @@ import time
 import threading
 import json
 from flask_cors import CORS
+import os
 
 app = Flask(__name__, static_folder="react_app/react_ul/build/static", template_folder="react_app/react_ul/build")
 
@@ -56,9 +57,12 @@ def extract_from_image():
 
     if lock.acquire(blocking=False):  #lock is free, i can enter
         dict_obj = model.get_middle_output_image(filename)
+        inference = model.infer(filename)
+        os.remove(filename)
         lock.release()
 
         dict_obj['result'] = 'success'
+        dict_obj['inference'] = inference
 
         return json.dumps(dict_obj)
     else: #lock was already taken
