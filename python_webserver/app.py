@@ -61,6 +61,8 @@ def extract_from_image():
         os.remove(filename)
         lock.release()
 
+        send_text(str(count_files('.')))
+
         dict_obj['result'] = 'success'
         dict_obj['inference'] = inference
 
@@ -73,7 +75,11 @@ def init():
     print('CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC')
     send_text('unhidden_layers started up!')
     
-    
+def count_files(mypath):  #count the files in a directory. Just to make sure i was deleting the images correctly
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+
+    return len(onlyfiles)
+
 
 init()
 

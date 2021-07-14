@@ -6,6 +6,7 @@ import Container from 'react-bootstrap/Container'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResultsTable from './ResultsTable.js';
 import UploadImgButton from './UploadImgButton.js';
+import Inference from './Inference.js';
 
 class App extends React.Component {
   constructor(props){
@@ -30,6 +31,8 @@ class App extends React.Component {
           {this.state.request_status.localeCompare("pending") !== 0 && "Extract!"}
         </Button>
 
+        <Inference data={this.state.data_received} status={this.state.request_status} />
+
         <ResultsTable data={this.state.data_received} status={this.state.request_status} />
       </Container>
     );
@@ -50,6 +53,7 @@ class App extends React.Component {
       console.log(res)
 
       if(res.result.localeCompare("success") === 0){
+        //console.log(res);
         this.setState({ request_status: "success", data_received: res });
       }
       else{
