@@ -20,7 +20,7 @@ unhidden_layers_1  | static
 
 '''
 
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from os import environ
 from mobilenet import Model
 from utils import print_current_RAM_usage, send_text
