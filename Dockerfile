@@ -6,6 +6,7 @@ FROM nikolaik/python-nodejs:python3.9-nodejs16
 #if you leave the RUN and COPY, it will get the code from the local directory
 
 RUN pip3 install Flask
+RUN pip3 install -U flask-cors
 RUN pip3 install keras
 RUN pip3 install tensorflow
 RUN pip3 install matplotlib

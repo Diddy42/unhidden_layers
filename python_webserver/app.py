@@ -27,8 +27,11 @@ from utils import print_current_RAM_usage, send_text
 import time
 import threading
 import json
+from flask_cors import CORS
 
 app = Flask(__name__, static_folder="react_app/react_ul/build/static", template_folder="react_app/react_ul/build")
+
+CORS(app)
 
 '''@app.before_first_request
 def before_first_request_func():
