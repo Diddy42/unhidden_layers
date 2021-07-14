@@ -46,12 +46,16 @@ def extract_from_image():
     print('test logging app.py')
 
     #imgFile = request.form['imgFile']
-    imgFile = request.files['imgFile']
+    imgFile = request.files['imgFile']   #imgFile is <class werkzeug.datastructures.FileStorage>
 
-    send_text(str(type(imgFile)))
+    filename = imgFile.filename
+
+    imgFile.save(filename)
+
+    #send_text(str(type(imgFile)))
 
     if lock.acquire(blocking=False):  #lock is free, i can enter
-        dict_obj = model.get_middle_output_image(imgFile)
+        dict_obj = model.get_middle_output_image(filename)
         lock.release()
 
         dict_obj['result'] = 'success'

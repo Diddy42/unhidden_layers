@@ -110,14 +110,10 @@ class Model:
 
         return image
 
-    def get_middle_output_image(self, img):
-        filename = '1.jpg'
-
-        print('starting extraction of middle layers...')
+    def get_middle_output_image(self, filename):
+        #filename = '1.jpg'
 
         dict_obj = self.extract(filename, 1)
-
-        print('finished extraction')
 
         return dict_obj
 
