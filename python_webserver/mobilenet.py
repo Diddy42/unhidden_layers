@@ -14,6 +14,7 @@ from os import listdir
 from os.path import isfile, join
 import os
 import json
+import base64
 
 class Model:
     def __init__(self):
@@ -71,6 +72,7 @@ class Model:
                     arr_img = arr_img / maxa
                     arr_img = arr_img * 255 
 
+                b64_img = base64.b64encode(arr_img)
                 result_dict['layer_' + str(sl)].append(arr_img)
 
                 
