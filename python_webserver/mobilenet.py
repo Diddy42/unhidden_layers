@@ -77,6 +77,7 @@ class Model:
                 
                 pil_img = Image.fromarray(arr_img)
                 pil_img = pil_img.convert("L")
+                pil_img = pil_img.resize((224, 224))
                 buff = BytesIO()
                 pil_img.save(buff, format="PNG")
                 b64_image_string = base64.b64encode(buff.getvalue()).decode("utf-8")
