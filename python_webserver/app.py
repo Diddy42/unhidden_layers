@@ -63,8 +63,6 @@ def extract_from_image():
         os.remove(filename)
         lock.release()
 
-        send_text(str(count_files('.')))
-
         dict_obj['result'] = 'success'
         dict_obj['inference'] = inference
 
