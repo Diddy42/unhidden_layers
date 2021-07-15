@@ -44,6 +44,14 @@ def before_first_request_func():
 def home_page():
     return render_template('index.html')
 
+@app.route('/get_default_data')
+def default_data():
+    data = model.get_default_data()
+
+    data['result'] = 'success'
+
+    return data
+
 @app.route('/extract_from_image', methods = ['POST'])
 def extract_from_image():
     print('test logging app.py')
