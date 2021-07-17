@@ -21,7 +21,7 @@ class App extends React.Component {
   render(){
     return (
       <Container>
-        <UploadImgButton/>
+        <UploadImgButton data={this.state.data_received} status={this.state.request_status}/>
 
         <Button 
           onClick={this.handleClick}
@@ -63,6 +63,23 @@ class App extends React.Component {
     .catch((err) => {
       console.log('testRequest catch')
       console.log(err)
+      this.setState({ request_status: "connection_error" });
+    })
+  }
+
+  componentDidMount = () => {
+    this.setState({ request_status: "pending_default_data" });
+
+    api.getDefaultData()
+    .then((res) => {
+      console.log(res)
+
+      if(res.result.localeCompare("success") === 0){
+        //console.log(res);
+        this.setState({ request_status: "received_default_data", data_received: res });
+      }
+    })
+    .catch((err) => {
       this.setState({ request_status: "connection_error" });
     })
   }

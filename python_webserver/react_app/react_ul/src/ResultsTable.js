@@ -19,7 +19,7 @@ class ResultsTable extends React.Component{
                 <h1>Error connecting to the server</h1>
             </>
         }
-        else if(this.props.status.localeCompare("success") === 0){
+        else if(this.props.status.localeCompare("success") === 0 || this.props.status.localeCompare("received_default_data") === 0){
             return <>
                 {this.createTable()}
             </>
@@ -27,6 +27,11 @@ class ResultsTable extends React.Component{
         else if(this.props.status.localeCompare("not_requested") === 0){
             return <>
                 <h1>Upload an image and click extract!</h1>
+            </>
+        }
+        else if(this.props.status.localeCompare("pending_default_data") === 0){
+            return <>
+                <h1>Loading default data...</h1>
             </>
         }
     }

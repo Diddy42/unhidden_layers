@@ -30,4 +30,28 @@ export async function extractFromImage(imgFile){
     })*/
 }
 
+export async function getDefaultData(){
+    const res = await fetch(url + 'get_default_data');
+
+    if(res.ok){
+        const resJ = await res.json();
+        return resJ;
+    }
+    
+    let err = {status: res.status, errObj:res};
+    throw err;
+
+    /*return new Promise((resolve, reject) => {
+        fetch(url + 'extract_from_image')
+        .then(response => response.json())
+        .then((data) => {
+            resolve(data)
+        })
+        .catch((err) => {
+            console.log('could not connect to server' + err)
+            reject(err);
+        })
+    })*/
+}
+
 
