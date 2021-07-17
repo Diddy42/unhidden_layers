@@ -23,7 +23,7 @@ unhidden_layers_1  | static
 from flask import Flask, render_template, request
 from os import environ
 from mobilenet import Model
-from utils import print_current_RAM_usage, send_text
+from utils import print_current_RAM_usage, send_text, get_memory_used
 import time
 import threading
 import json
@@ -73,6 +73,8 @@ def extract_from_image():
 
         dict_obj['result'] = 'success'
         dict_obj['inference'] = inference
+
+        send_text(str(get_memory_used()))
 
         return json.dumps(dict_obj)
     else: #lock was already taken
