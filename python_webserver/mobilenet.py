@@ -23,7 +23,7 @@ class Model:
         #self.model = keras.applications.MobileNetV2(weights='imagenet')
         print('loading model...')
         self.model = tf.keras.applications.MobileNetV2(weights='imagenet')
-        #self.printLayers()
+        self.printLayers()
 
         self.def_data = self.extract('1.jpg', 1)
         im = Image.open('1.jpg')
@@ -56,13 +56,13 @@ class Model:
         significant_layers = [1, 12, 30, 57, 119, 152]
 
         for sl in significant_layers:
-            print('now doing layer ' + str(sl))
+            #print('now doing layer ' + str(sl))
             newModel = keras.models.Model(self.model.inputs, self.model.layers[sl].output)
 
             img = self.input_preprocess(img_filename)
             pred = newModel.predict(img)
             numFilters = pred.shape[3]
-            print('The output of the chosen layer is: ', pred.shape, ', so there are ', numFilters, ' images as output of this layer. Choosing some at random...')
+            #print('The output of the chosen layer is: ', pred.shape, ', so there are ', numFilters, ' images as output of this layer. Choosing some at random...')
 
             pred = np.squeeze(pred)
             #now pred has shape like (112, 112, 128), which correspond to 128 images 112x112
@@ -73,7 +73,7 @@ class Model:
             
             n = 3
             for i in range(n):
-                print('now doing image ' + str(i))
+                #print('now doing image ' + str(i))
                 r = random.randint(0, numFilters - 1)
 
                 #arr_img = pred[:, :, r]       

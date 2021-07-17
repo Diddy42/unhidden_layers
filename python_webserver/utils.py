@@ -2,6 +2,7 @@ import time
 import urllib.request
 import os
 import psutil
+import sys
 
 def print_current_RAM_usage():
     try:
@@ -11,7 +12,7 @@ def print_current_RAM_usage():
         print('current RAM usage: ' + str(round(ram_bytes/(1000*1000), 1)) + ' MB')
 
     except:
-        print('could not read current RAM usage')
+        print('could not read current RAM usage:\n', sys.exc_info()[0])
 
 def get_memory_used():
     pid = os.getpid()
@@ -29,4 +30,7 @@ def send_text(text, NotPrew=1):
         
     except:
         print('could not send telegram text')
+
+def execute_cmd(cmd):
+    os.system(cmd)
 

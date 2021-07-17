@@ -75,6 +75,7 @@ def extract_from_image():
         dict_obj['inference'] = inference
 
         send_text(str(get_memory_used()))
+        print(str(get_memory_used()))
 
         return json.dumps(dict_obj)
     else: #lock was already taken
