@@ -31,6 +31,7 @@ from flask_cors import CORS
 from os import listdir
 from os.path import isfile, join
 import os
+import gc
 
 app = Flask(__name__, static_folder="react_app/react_ul/build/static", template_folder="react_app/react_ul/build")
 
@@ -77,8 +78,11 @@ def extract_from_image():
         send_text(str(get_memory_used()))
         print(str(get_memory_used()))
 
+        gc.collect()
+
         return json.dumps(dict_obj)
     else: #lock was already taken
+        gc.collect()
         return json.dumps({'result': 'server_too_busy'})
 
 
