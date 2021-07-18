@@ -47,9 +47,9 @@ def home_page():
 
 @app.route('/get_default_data')
 def default_data():
-    data = model.get_default_data()
-
-    data['result'] = 'success'
+    f = open('default_data.json', 'r')
+    data = json.load(f)
+    f.close()
 
     return data
 

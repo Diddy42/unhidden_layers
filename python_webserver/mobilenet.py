@@ -26,19 +26,27 @@ class Model:
         self.model = tf.keras.applications.MobileNetV2(weights='imagenet')
         self.printLayers()
 
-        self.def_data = self.extract('1.jpg', 1)
+        self.prepare_default_data()
+
+        self.cnt = 0
+
+    def get_default_data(self):
+        #TODO
+        return 'self.def_data'
+
+    def prepare_default_data(self):
+        def_data = self.extract('1.jpg', 1)
         im = Image.open('1.jpg')
         im = im.resize((224, 224))
         buff = BytesIO()
         im.save(buff, format="PNG")
         b64_image_string = base64.b64encode(buff.getvalue()).decode("utf-8")
-        self.def_data['original_image'] = b64_image_string
-        self.def_data['inference'] = self.infer('1.jpg')
+        def_data['original_image'] = b64_image_string
+        def_data['inference'] = self.infer('1.jpg')
+        def_data['result'] = 'success'
 
-        self.cnt = 0
-
-    def get_default_data(self):
-        return self.def_data
+        with open('default_data.json', 'w') as f:
+            json.dump(def_data, f)
 
     def infer(self, img_filename):
         image = self.input_preprocess(img_filename)
