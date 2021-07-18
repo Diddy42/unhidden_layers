@@ -24,7 +24,7 @@ class UploadImgButton extends React.Component {
     }
 
     componentDidUpdate = (prevProps) => {
-        if(this.props.status.localeCompare(prevProps.status) != 0){
+        if(this.props.status.localeCompare(prevProps.status) !== 0){
             if(this.props.status.localeCompare("received_default_data") === 0){
                 this.setState({ img_src: 'data:image/png;base64,' + this.props.data.original_image });
             }

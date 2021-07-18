@@ -17,6 +17,7 @@ import json
 import base64
 from io import BytesIO
 from PIL import Image
+import gc
 
 class Model:
     def __init__(self):
@@ -96,7 +97,7 @@ class Model:
 
                 result_dict['layer_' + str(sl)].append(b64_image_string)
 
-                
+                gc.collect()
                 
                 '''
                 plt.figure()

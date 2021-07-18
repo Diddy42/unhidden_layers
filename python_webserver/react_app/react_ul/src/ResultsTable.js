@@ -52,6 +52,8 @@ class ResultsTable extends React.Component{
             //console.log(this.props.data[key]);
         }
 
+        layers.sort( function(l1, l2){return l1.name.split("_")[1] - l2.name.split("_")[1]} );
+
 		return <>
 			<Table>
 				<thead>
