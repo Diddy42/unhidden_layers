@@ -49,3 +49,4 @@ export default UploadImgButton;
 /*
 inspiration: https://flaviocopes.com/file-upload-using-ajax/
 */
+
