@@ -2,11 +2,12 @@ import './App.css';
 import * as api from './api.js'
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
+import Container from 'react-bootstrap/Container';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import ResultsTable from './ResultsTable.js';
 import UploadImgButton from './UploadImgButton.js';
 import Inference from './Inference.js';
+import ULNavbar from './ULNavbar';
 
 class App extends React.Component {
   constructor(props){
@@ -20,10 +21,13 @@ class App extends React.Component {
 
   render(){
     return (
+      <>
+      <ULNavbar/>
       <Container fluid className='m-4'>
+
         <UploadImgButton data={this.state.data_received} status={this.state.request_status}/>
 
-        <Button className='ml-5'
+        <Button className='ml-5' variant='outline-secondary'
           onClick={this.handleClick}
           disabled={this.state.request_status.localeCompare("pending") === 0}
         >
@@ -35,6 +39,7 @@ class App extends React.Component {
 
         <ResultsTable data={this.state.data_received} status={this.state.request_status} />
       </Container>
+      </>
     );
   }
 

@@ -18,7 +18,7 @@ class UploadImgButton extends React.Component {
                 <Container fluid>
                     <Row>
                         <Col md="auto">
-                            <Alert variant='info'>
+                            <Alert variant='secondary'>
                                 <h2>Upload image:</h2>
                             </Alert>
                         </Col>

@@ -11,7 +11,7 @@ class Inference extends React.Component {
                 <Container fluid className='mt-4 mb-4'>
                     <Row>
                         <Col md="auto">
-                            <Alert variant='info'>
+                            <Alert variant='secondary'>
                                 <h3>Model inference: {this.props.data['inference']}</h3>
                             </Alert>
                         </Col>

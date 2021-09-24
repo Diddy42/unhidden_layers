@@ -1,11 +1,15 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import loading_gif from './loading_gifs/1.gif';
+import Container from 'react-bootstrap/Container';
 
 class ResultsTable extends React.Component{
     render(){
         if(this.props.status.localeCompare("pending") === 0){
             return <>
-                <h1>Maybe show loading gif?</h1>
+                <Container className='mt-5'>
+                    <img src={loading_gif} alt="loading..." />
+                </Container>
             </>
         }
         else if(this.props.status.localeCompare("server_too_busy") === 0){
