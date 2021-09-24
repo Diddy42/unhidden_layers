@@ -1,4 +1,8 @@
 import React from 'react';
+import Alert from 'react-bootstrap/Alert';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class UploadImgButton extends React.Component {
     constructor(props){
@@ -11,7 +15,15 @@ class UploadImgButton extends React.Component {
 
     render(){ 
         return <>
-                <h1>Upload image:</h1>
+                <Container fluid>
+                    <Row>
+                        <Col md="auto">
+                            <Alert variant='info'>
+                                <h2>Upload image:</h2>
+                            </Alert>
+                        </Col>
+                    </Row>
+                </Container>
                 <input type="file" id="fileUpload" onInput={this.onInput} />
                 <img id='your_img' src={this.state.img_src} alt=' ' width="20%" height="20%"/>
             </>

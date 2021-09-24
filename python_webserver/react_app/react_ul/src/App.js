@@ -20,10 +20,10 @@ class App extends React.Component {
 
   render(){
     return (
-      <Container>
+      <Container fluid className='m-4'>
         <UploadImgButton data={this.state.data_received} status={this.state.request_status}/>
 
-        <Button 
+        <Button className='ml-5'
           onClick={this.handleClick}
           disabled={this.state.request_status.localeCompare("pending") === 0}
         >
