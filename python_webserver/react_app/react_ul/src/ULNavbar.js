@@ -1,6 +1,8 @@
 import React from 'react';
 import Container from 'react-bootstrap/Container';
-import Navbar from 'react-bootstrap/Navbar'
+import Navbar from 'react-bootstrap/Navbar';
+import Nav from 'react-bootstrap/Nav';
+import { Link } from "react-router-dom";
 
 
 class ULNavbar extends React.Component{
@@ -8,8 +10,15 @@ class ULNavbar extends React.Component{
         return <>
                 <Navbar bg="dark" variant="dark">
                     <Container fluid>
-                        <Navbar.Brand >Unhidden layers</Navbar.Brand>
-                        
+                        <Link to="/">
+                            <Navbar.Brand>Unhidden layers</Navbar.Brand>
+                        </Link>
+
+                        <Nav className="mr-auto">
+                            <Link to="/explanation">
+                                <Nav.Link href="/explanation">What's this?</Nav.Link>
+                            </Link>
+                        </Nav>
                     </Container>
                     </Navbar>
             </>

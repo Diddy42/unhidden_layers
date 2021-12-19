@@ -8,6 +8,8 @@ import ResultsTable from './ResultsTable.js';
 import UploadImgButton from './UploadImgButton.js';
 import Inference from './Inference.js';
 import ULNavbar from './ULNavbar';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ExplanationPage from './ExplanationPage'
 
 class App extends React.Component {
   constructor(props){
@@ -20,6 +22,19 @@ class App extends React.Component {
   }
 
   render(){
+    return (
+      <>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={this.homePage()} />
+            <Route path="/explanation" element={<ExplanationPage/>}></Route>
+          </Routes>
+        </BrowserRouter>
+      </>
+    );
+  }
+
+  homePage = () => {
     return (
       <>
       <ULNavbar/>

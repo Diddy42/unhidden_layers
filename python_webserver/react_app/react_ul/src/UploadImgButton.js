@@ -10,7 +10,12 @@ class UploadImgButton extends React.Component {
 
         //this.default_pic = require('./images/default_photo.png');
 
-        this.state = {img_src : require('./images/default_photo.png').default};
+        if(this.props.status.localeCompare("received_default_data") === 0){
+            this.state = { img_src: 'data:image/png;base64,' + this.props.data.original_image };
+        }
+        else{
+            this.state = {img_src : require('./images/default_photo.png').default};
+        }
     }
 
     render(){ 

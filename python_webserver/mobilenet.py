@@ -49,6 +49,13 @@ class Model:
             json.dump(def_data, f)
 
     def infer(self, img_filename):
+        '''
+        There may be something wrong with the predictions.
+        Maybe wrong preprocessing or decoding?
+        See:
+            https://www.gcptutorials.com/post/image-classification-with-mobilenetv2-model
+            https://www.tensorflow.org/api_docs/python/tf/keras/applications/mobilenet_v2/decode_predictions
+        '''
         image = self.input_preprocess(img_filename)
         yhat = self.model.predict(image)
         label = decode_predictions(yhat)

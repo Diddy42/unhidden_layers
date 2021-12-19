@@ -22,6 +22,10 @@ COPY . /unhidden_layers/
 WORKDIR /unhidden_layers/python_webserver/react_app/react_ul/
 
 RUN npm install
+
+#why you should update regularly: https://github.com/browserslist/browserslist#browsers-data-updating
+RUN npx browserslist@latest --update-db
+
 RUN npm run build
 
 WORKDIR /unhidden_layers/python_webserver/
