@@ -1,8 +1,7 @@
 from keras.preprocessing.image import load_img
 from keras.preprocessing.image import img_to_array
-from keras.applications.vgg16 import preprocess_input
-from keras.applications.vgg16 import decode_predictions
-from keras.applications.vgg16 import VGG16
+from keras.applications.mobilenet_v2 import preprocess_input
+from keras.applications.mobilenet_v2 import decode_predictions
 import keras
 import tensorflow as tf
 import sys
@@ -169,8 +168,8 @@ def new_image(mypath):
 def clear_unprocessed(mypath, finished_file):
     onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
     for f in onlyfiles:
-        print('removing ' + unprocessed_folder + '/' + f)
-        os.remove(unprocessed_folder + '/' + f)
+        print('removing ' + mypath + '/' + f)
+        os.remove(mypath + '/' + f)
 
     f = open(finished_file, 'w')
     f.close()
