@@ -67,13 +67,17 @@ def extract_from_image():
     #send_text(str(type(imgFile)))
 
     if lock.acquire(blocking=False):  #lock is free, i can enter
-        dict_obj = model.get_middle_output_image(filename)
-        inference = model.infer(filename)
+        try:
+            dict_obj = model.get_middle_output_image(filename)
+            inference = model.infer(filename)
+
+            dict_obj['result'] = 'success'
+            dict_obj['inference'] = inference
+        except:
+            dict_obj['result'] = 'extraction_failed'
+
         os.remove(filename)
         lock.release()
-
-        dict_obj['result'] = 'success'
-        dict_obj['inference'] = inference
 
         send_text(str(get_memory_used()))
         print(str(get_memory_used()))

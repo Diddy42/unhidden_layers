@@ -23,6 +23,11 @@ class ResultsTable extends React.Component{
                 <h1>Error connecting to the server</h1>
             </>
         }
+        else if(this.props.status.localeCompare("extraction_failed") === 0){
+            return <>
+                <h1>Extraction of the image failed. Please check the format of the image and use a common one (.jpeg, .png, ...)</h1>
+            </>
+        }
         else if(this.props.status.localeCompare("success") === 0 || this.props.status.localeCompare("received_default_data") === 0){
             return <>
                 {this.createTable()}
