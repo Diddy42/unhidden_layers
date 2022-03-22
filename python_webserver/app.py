@@ -67,36 +67,31 @@ def extract_from_image():
     #send_text(str(type(imgFile)))
 
     if lock.acquire(blocking=False):  #lock is free, i can enter
-        send_text('trying to extract...')
+        #send_text('trying to extract...')
         try:
             dict_obj = model.get_middle_output_image(filename)
             inference = model.infer(filename)
 
             dict_obj['result'] = 'success'
             dict_obj['inference'] = inference
-            send_text('extract successful')
+            #send_text('extract successful')
         except:
-            send_text('except clause')
+            #send_text('except clause')
             dict_obj = {}
             dict_obj['result'] = 'extraction_failed'
-
-        if os.path.exists(filename):
-            send_text('image file exists')
-        else:
-            send_text('image file does NOT exist')
         
         os.remove(filename)
         lock.release()
 
-        send_text('lock_release')
+        #send_text('lock_release')
 
-        send_text(str(get_memory_used()))
+        send_text(str(round(get_memory_used()*1000, 2)) + ' MB')
         print(str(get_memory_used()))
 
         gc.collect()
 
-        send_text('returning dict_obj with result:')
-        send_text(str(dict_obj['result']))
+        #send_text('returning dict_obj with result:')
+        #send_text(str(dict_obj['result']))
 
         return json.dumps(dict_obj)
     else: #lock was already taken
