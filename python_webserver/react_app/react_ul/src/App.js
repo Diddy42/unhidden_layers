@@ -77,7 +77,8 @@ class App extends React.Component {
         this.setState({ request_status: "success", data_received: res });
       }
       else{
-        this.setState({ request_status: "server_too_busy" });
+        //this.setState({ request_status: "server_too_busy" });
+        this.setState({ request_status: res.result });
       }
     })
     .catch((err) => {
