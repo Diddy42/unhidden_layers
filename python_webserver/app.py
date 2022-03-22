@@ -79,6 +79,11 @@ def extract_from_image():
             send_text('except clause')
             dict_obj['result'] = 'extraction_failed'
 
+        if os.path.exists(filename):
+            send_text('image file exists')
+        else:
+            send_text('image file does NOT exist')
+        
         os.remove(filename)
         lock.release()
 
