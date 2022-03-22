@@ -77,6 +77,7 @@ def extract_from_image():
             send_text('extract successful')
         except:
             send_text('except clause')
+            dict_obj = {}
             dict_obj['result'] = 'extraction_failed'
 
         if os.path.exists(filename):
