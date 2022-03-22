@@ -11,10 +11,12 @@ export async function extractFromImage(imgFile){
 
     if(res.ok){
         const resJ = await res.json();
+        console.log(resJ);
         return resJ;
     }
     
     let err = {status: res.status, errObj:res};
+    console.log(err);
     throw err;
 
     /*return new Promise((resolve, reject) => {
