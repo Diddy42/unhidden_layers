@@ -45,6 +45,10 @@ def before_first_request_func():
 def home_page():
     return render_template('index.html')
 
+@app.route('/explanation')
+def exp_page():
+    return render_template('index.html')
+
 @app.route('/get_default_data')
 def default_data():
     f = open('default_data.json', 'r')
