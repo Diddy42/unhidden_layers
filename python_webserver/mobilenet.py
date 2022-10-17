@@ -1,4 +1,4 @@
-from keras.preprocessing.image import load_img
+from keras.utils.image_utils import load_img
 from keras.preprocessing.image import img_to_array
 from keras.applications.mobilenet_v2 import preprocess_input
 from keras.applications.mobilenet_v2 import decode_predictions
